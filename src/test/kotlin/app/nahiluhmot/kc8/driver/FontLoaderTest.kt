@@ -17,7 +17,7 @@ class FontLoaderTest {
 
         assertEquals(0xF0u, state.memory[0])
 
-        for (i in Constants.INITIAL_PROGRAM_COUNTER.toInt()..(state.memory.size - 1)) {
+        for (i in Constants.INITIAL_PROGRAM_COUNTER.toInt()..<state.memory.size) {
             assertEquals(state.memory[i], 0u, "memory[$i] != 0")
         }
     }

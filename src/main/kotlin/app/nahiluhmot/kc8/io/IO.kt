@@ -6,8 +6,8 @@ package app.nahiluhmot.kc8.io
  */
 interface IO {
     /**
-     * Start the IO driver. This method is always called first; the behavior of other methods when
-     * this method has not been called.
+     * Start the IO driver. This method is always called first; the behavior of other methods is
+     * undefined when this method has not been called.
      */
     fun startUp()
 
@@ -30,6 +30,11 @@ interface IO {
      * @param key the key to test
      */
     fun isKeyPressed(key: UByte): Boolean
+
+    /**
+     * Get the currently pressed key; null if no key is currently pressed.
+     */
+    fun getCurrentKey(): UByte?
 
     /**
      * Start emitting a sound.

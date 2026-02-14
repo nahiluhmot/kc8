@@ -14,4 +14,8 @@ object Constants {
 
     // Font
     const val FONT_PATH = "/font.c8"
+
+    // Screen
+    const val SCREEN_WIDTH = 64
+    const val SCREEN_HEIGHT = 32
 }

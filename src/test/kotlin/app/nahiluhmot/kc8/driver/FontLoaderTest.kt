@@ -1,5 +1,6 @@
 package app.nahiluhmot.kc8.driver
 
+import app.nahiluhmot.kc8.Constants
 import app.nahiluhmot.kc8.State
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -15,5 +16,9 @@ class FontLoaderTest {
         FontLoader.loadFont(state)
 
         assertEquals(0xF0u, state.memory[0])
+
+        for (i in Constants.INITIAL_PROGRAM_COUNTER.toInt()..(state.memory.size - 1)) {
+            assertEquals(state.memory[i], 0u, "memory[$i] != 0")
+        }
     }
 }

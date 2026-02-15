@@ -7,12 +7,20 @@ import app.nahiluhmot.kc8.KeyHandler
 import javax.swing.SwingUtilities
 
 @OptIn(ExperimentalUnsignedTypes::class)
+/**
+ * Instance of the IO interface for Swing.
+ *
+ * @param scale the scale of the rendered image
+ */
 class SwingIO(val scale: Int = Constants.DEFAULT_SCALE) : IO {
+    private val panel = SwingChip8JPanel(scale)
     private lateinit var frame: SwingChip8JFrame
 
     override fun startUp(keyHandler: KeyHandler) {
         SwingUtilities.invokeLater {
-            frame = SwingChip8JFrame(scale, keyHandler)
+            val keyListener = SwingChip8KeyListener(keyHandler)
+
+            frame = SwingChip8JFrame(panel, keyListener)
         }
     }
 
@@ -24,7 +32,7 @@ class SwingIO(val scale: Int = Constants.DEFAULT_SCALE) : IO {
 
     override fun render(frameBuffer: FrameBuffer) {
         SwingUtilities.invokeLater {
-            frame.updateDisplay(frameBuffer)
+            panel.updateDisplay(frameBuffer)
         }
     }
 

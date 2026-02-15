@@ -4,6 +4,9 @@ import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
 import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
 import app.nahiluhmot.kc8.swing.SwingIO
 
+/**
+ * Application entrypoint.
+ */
 fun main() {
     val state = State()
     val io = SwingIO()

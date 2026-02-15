@@ -1,26 +1,25 @@
 package app.nahiluhmot.kc8.swing
 
-import app.nahiluhmot.kc8.FrameBuffer
-import app.nahiluhmot.kc8.KeyHandler
+import app.nahiluhmot.kc8.Constants.APPLICATION_NAME
+import java.awt.event.KeyListener
 import javax.swing.JFrame
+import javax.swing.JPanel
 
-private const val WINDOW_TITLE = "CHIP-8"
-
-class SwingChip8JFrame(scale: Int, keyHandler: KeyHandler) : JFrame(WINDOW_TITLE) {
-    private val panel: SwingChip8JPanel = SwingChip8JPanel(scale)
-
+/**
+ * Frame which sets up a single Panel and KeyListener.
+ *
+ * @param panel JPanel contained in this frame.
+ * @param keyListener the KeyListener which handles events.
+ */
+class SwingChip8JFrame(panel: JPanel, keyListener: KeyListener) : JFrame(APPLICATION_NAME) {
     init {
         defaultCloseOperation = EXIT_ON_CLOSE
         add(panel)
-        addKeyListener(SwingChip8KeyListener(keyHandler))
+        addKeyListener(keyListener)
         pack()
         setLocationRelativeTo(null)
         isFocusable = true
         requestFocus()
         isVisible = true
-    }
-
-    fun updateDisplay(frameBuffer: FrameBuffer) {
-        panel.updateDisplay(frameBuffer)
     }
 }

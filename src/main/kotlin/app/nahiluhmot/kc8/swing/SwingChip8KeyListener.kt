@@ -6,6 +6,11 @@ import app.nahiluhmot.kc8.KeyHandler
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
+/**
+ * Listens to keyboard events and propagates relevant events to the KeyHandler.
+ *
+ * @param keyHandler the KeyHandler to which events are propagated.
+ */
 class SwingChip8KeyListener(val keyHandler: KeyHandler) : KeyListener {
     companion object {
         private val KEY_CODE_MAP: Map<Int, Key> = mapOf(

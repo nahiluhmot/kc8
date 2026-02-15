@@ -4,6 +4,10 @@ package app.nahiluhmot.kc8
  * Application constants.
  */
 object Constants {
+    // Application
+
+    const val APPLICATION_NAME = "KC8"
+
     // Font
 
     const val FONT_PATH = "/font.ch8"

@@ -13,6 +13,12 @@ typealias Memory = UByteArray
 typealias FrameBuffer = Array<BooleanArray>
 
 /**
+ * The display is 64x32. Using a ULongArray, we can represent each row as an element in the Array.
+ * ULongs are convenient for writing sprites using bitwise operations.
+ */
+typealias Display = ULongArray
+
+/**
  * Op code registers.
  */
 typealias Registers = UByteArray

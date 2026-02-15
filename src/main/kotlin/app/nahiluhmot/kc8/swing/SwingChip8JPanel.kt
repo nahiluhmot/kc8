@@ -10,6 +10,11 @@ import java.awt.image.BufferedImage
 import javax.swing.JPanel
 
 @OptIn(ExperimentalUnsignedTypes::class)
+/***
+ * JPanel for the rendered game.
+ *
+ * @param scale the scale for rendering
+ */
 class SwingChip8JPanel(scale: Int) : JPanel() {
     private val scaledWidth: Int = scale * SCREEN_WIDTH
     private val scaledHeight: Int = scale * SCREEN_HEIGHT
@@ -33,6 +38,11 @@ class SwingChip8JPanel(scale: Int) : JPanel() {
         g2d.drawImage(imageBuffer, 0, 0, scaledWidth, scaledHeight, null)
     }
 
+    /**
+     * Write a new image to the display.
+     *
+     * @param frameBuffer the image to write.
+     */
     fun updateDisplay(frameBuffer: FrameBuffer) {
         val raster = imageBuffer.raster
 

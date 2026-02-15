@@ -1,7 +1,11 @@
 package app.nahiluhmot.kc8
 
+/**
+ * Application constants.
+ */
 object Constants {
     // Memory
+
     const val MEMORY_BYTES = 4096
     const val FRAME_BUFFER_BYTES = 2048
     const val REGISTER_BYTES = 16
@@ -13,9 +17,11 @@ object Constants {
     const val INITIAL_PROGRAM_COUNTER: UShort = 0x200u
 
     // Font
+
     const val FONT_PATH = "/font.c8"
 
     // Screen
+
     const val SCREEN_WIDTH = 64
     const val SCREEN_HEIGHT = 32
     const val DEFAULT_SCALE = 10

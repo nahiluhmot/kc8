@@ -1,6 +1,9 @@
 package app.nahiluhmot.kc8
 
 @OptIn(ExperimentalUnsignedTypes::class)
+/**
+ * Maintains state of the interpreter.
+ */
 class State(
     val memory: UByteArray = UByteArray(Constants.MEMORY_BYTES),
     val frameBuffer: UByteArray = UByteArray(Constants.FRAME_BUFFER_BYTES),

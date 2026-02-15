@@ -8,6 +8,8 @@ interface IO {
     /**
      * Start the IO driver. This method is always called first; the behavior of other methods is
      * undefined when this method has not been called.
+     *
+     * @param keyHandler handles keyboard input
      */
     fun startUp(keyHandler: KeyHandler)
 

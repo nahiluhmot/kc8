@@ -15,7 +15,7 @@ object Constants {
     const val INITIAL_SOUND_TIMER: SoundTimer = 0u
     const val INITIAL_INDEX_REGISTER: IndexRegister = 0u
     const val INITIAL_PROGRAM_COUNTER: ProgramCounter = 0x200u
-    const val DEFAULT_PRESSED_KEYS: PressedKeys = 0u
+    const val DEFAULT_PRESSED_KEYS: KeySet = 0u
 
     // Font
 

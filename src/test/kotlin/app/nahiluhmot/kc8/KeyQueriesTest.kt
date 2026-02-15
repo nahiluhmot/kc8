@@ -22,13 +22,13 @@ class KeyQueriesTest {
 
     @Test
     fun testAddAllKeys() {
-        var pressedKeys: PressedKeys = 0x0u
+        var keySet: KeySet = 0x0u
 
         for (key in 0x0u..0xFu) {
-            pressedKeys = KeyQueries.addKey(pressedKeys, key.toUByte())
+            keySet = KeyQueries.addKey(keySet, key.toUByte())
         }
 
-        assertEquals(0x0u.toUShort().inv(), pressedKeys)
+        assertEquals(0x0u.toUShort().inv(), keySet)
     }
 
     @Test
@@ -38,22 +38,22 @@ class KeyQueriesTest {
 
     @Test
     fun testRemoveAddedKey() {
-        var pressedKeys: PressedKeys = 0b1000010010000u
+        var keySet: KeySet = 0b1000010010000u
 
-        pressedKeys = KeyQueries.removeKey(pressedKeys, 0x7u)
+        keySet = KeyQueries.removeKey(keySet, 0x7u)
 
-        assertEquals(0b1000000010000u, pressedKeys)
+        assertEquals(0b1000000010000u, keySet)
     }
 
     @Test
     fun testIsKeySet() {
-        val pressedKeys: PressedKeys = 0b1001u
+        val keySet: KeySet = 0b1001u
 
-        assertTrue(KeyQueries.isKeyPressed(pressedKeys, 0x0u))
-        assertFalse(KeyQueries.isKeyPressed(pressedKeys, 0x1u))
-        assertFalse(KeyQueries.isKeyPressed(pressedKeys, 0x2u))
-        assertTrue(KeyQueries.isKeyPressed(pressedKeys, 0x3u))
-        assertFalse(KeyQueries.isKeyPressed(pressedKeys, 0x4u))
+        assertTrue(KeyQueries.isKeyPressed(keySet, 0x0u))
+        assertFalse(KeyQueries.isKeyPressed(keySet, 0x1u))
+        assertFalse(KeyQueries.isKeyPressed(keySet, 0x2u))
+        assertTrue(KeyQueries.isKeyPressed(keySet, 0x3u))
+        assertFalse(KeyQueries.isKeyPressed(keySet, 0x4u))
     }
 
     @Test

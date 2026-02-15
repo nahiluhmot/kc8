@@ -14,5 +14,5 @@ class State(
     var soundTimer: SoundTimer = Constants.INITIAL_SOUND_TIMER,
     var indexRegister: IndexRegister = Constants.INITIAL_INDEX_REGISTER,
     var programCounter: ProgramCounter = Constants.INITIAL_PROGRAM_COUNTER,
-    var pressedKeys: PressedKeys = Constants.DEFAULT_PRESSED_KEYS
+    var keySet: KeySet = Constants.DEFAULT_PRESSED_KEYS
 )

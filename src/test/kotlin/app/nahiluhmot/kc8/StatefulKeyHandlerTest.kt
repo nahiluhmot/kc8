@@ -14,7 +14,7 @@ class StatefulKeyHandlerTest {
 
         keyHandler.onKeyDown(0x4u)
 
-        assertPressedKeys(state.pressedKeys, setOf(0x4u))
+        assertPressedKeys(state.keySet, setOf(0x4u))
     }
 
     @Test
@@ -24,7 +24,7 @@ class StatefulKeyHandlerTest {
 
         keyHandler.onKeyUp(0xEu)
 
-        assertNoPressedKeys(state.pressedKeys)
+        assertNoPressedKeys(state.keySet)
     }
 
     @Test
@@ -35,7 +35,7 @@ class StatefulKeyHandlerTest {
         keyHandler.onKeyDown(0x7u)
         keyHandler.onKeyUp(0x7u)
 
-        assertNoPressedKeys(state.pressedKeys)
+        assertNoPressedKeys(state.keySet)
     }
 
     @Test
@@ -46,7 +46,7 @@ class StatefulKeyHandlerTest {
         keyHandler.onKeyDown(0x1u)
         keyHandler.onKeyDown(0xBu)
 
-        assertPressedKeys(state.pressedKeys, setOf(0x1u, 0xBu))
+        assertPressedKeys(state.keySet, setOf(0x1u, 0xBu))
     }
 
     @Test
@@ -54,13 +54,13 @@ class StatefulKeyHandlerTest {
         val state = State()
         val keyHandler = StatefulKeyHandler(state)
 
-        assertNoPressedKeys(state.pressedKeys)
+        assertNoPressedKeys(state.keySet)
 
         for (key in 0x0u..0xFu) {
             keyHandler.onKeyDown(key.toUByte())
-            assertPressedKeys(state.pressedKeys, setOf(key.toUByte()))
+            assertPressedKeys(state.keySet, setOf(key.toUByte()))
             keyHandler.onKeyUp(key.toUByte())
-            assertNoPressedKeys(state.pressedKeys)
+            assertNoPressedKeys(state.keySet)
         }
     }
 
@@ -75,26 +75,26 @@ class StatefulKeyHandlerTest {
         keyHandler.onKeyUp(0x4u)
         keyHandler.onKeyDown(0x5u)
 
-        assertPressedKeys(state.pressedKeys, setOf(0x3u, 0x5u))
+        assertPressedKeys(state.keySet, setOf(0x3u, 0x5u))
     }
 
-    private fun assertNoPressedKeys(pressedKeys: PressedKeys) {
-        assertPressedKeys(pressedKeys, emptySet())
+    private fun assertNoPressedKeys(keySet: KeySet) {
+        assertPressedKeys(keySet, emptySet())
     }
 
-    private fun assertPressedKeys(pressedKeys: PressedKeys, expectedKeys: Collection<UByte>) {
+    private fun assertPressedKeys(keySet: KeySet, expectedKeys: Collection<UByte>) {
         for (key in 0x0u..0xFu) {
             if (expectedKeys.contains(key.toUByte())) {
-                assertTrue(KeyQueries.isKeyPressed(pressedKeys, key.toUByte()), "Expected $key to be pressed")
+                assertTrue(KeyQueries.isKeyPressed(keySet, key.toUByte()), "Expected $key to be pressed")
             } else {
                 assertFalse(
-                    KeyQueries.isKeyPressed(pressedKeys, key.toUByte()),
+                    KeyQueries.isKeyPressed(keySet, key.toUByte()),
                     "Expected $key to not be pressed"
                 )
             }
         }
 
-        val pressedKey = KeyQueries.getPressedKey(pressedKeys)
+        val pressedKey = KeyQueries.getPressedKey(keySet)
 
         if (expectedKeys.isEmpty()) {
             assertNull(pressedKey)

@@ -51,4 +51,4 @@ typealias ProgramCounter = UShort
  * Chip-8 supports key-presses on 0-9, A-F. To be efficient, we can store the currently pressed
  * keys as an unsigned short. See KeyQueries for details on how these keys are updated and queried.
  */
-typealias PressedKeys = UShort
+typealias KeySet = UShort

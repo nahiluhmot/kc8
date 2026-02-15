@@ -1,4 +1,4 @@
-package app.nahiluhmot.kc8.io
+package app.nahiluhmot.kc8
 
 @OptIn(ExperimentalUnsignedTypes::class)
 /**
@@ -9,7 +9,7 @@ interface IO {
      * Start the IO driver. This method is always called first; the behavior of other methods is
      * undefined when this method has not been called.
      */
-    fun startUp()
+    fun startUp(keyHandler: KeyHandler)
 
     /**
      * Stop the IO driver. The behavior of other methods is not defined after this method has been
@@ -23,18 +23,6 @@ interface IO {
      * @param frameBuffer the buffer to render
      */
     fun render(frameBuffer: UByteArray)
-
-    /**
-     * Predicate to test whether a key is pressed. Chip-8 supports input from 0-9, A-F.
-     *
-     * @param key the key to test
-     */
-    fun isKeyPressed(key: UByte): Boolean
-
-    /**
-     * Get the currently pressed key; null if no key is currently pressed.
-     */
-    fun getCurrentKey(): UByte?
 
     /**
      * Start emitting a sound.

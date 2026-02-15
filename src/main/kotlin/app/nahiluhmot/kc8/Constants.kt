@@ -18,4 +18,5 @@ object Constants {
     // Screen
     const val SCREEN_WIDTH = 64
     const val SCREEN_HEIGHT = 32
+    const val DEFAULT_SCALE = 10
 }

@@ -1,7 +1,5 @@
-package app.nahiluhmot.kc8.driver
+package app.nahiluhmot.kc8
 
-import app.nahiluhmot.kc8.Constants
-import app.nahiluhmot.kc8.State
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

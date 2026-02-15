@@ -1,6 +1,7 @@
 package app.nahiluhmot.kc8.swing
 
 import app.nahiluhmot.kc8.Constants
+import app.nahiluhmot.kc8.FrameBuffer
 import app.nahiluhmot.kc8.IO
 import app.nahiluhmot.kc8.KeyHandler
 
@@ -13,7 +14,7 @@ class SwingIO(val scale: Int = Constants.DEFAULT_SCALE) : IO {
         TODO("Not yet implemented")
     }
 
-    override fun render(frameBuffer: UByteArray) {
+    override fun render(frameBuffer: FrameBuffer) {
         TODO("Not yet implemented")
     }
 

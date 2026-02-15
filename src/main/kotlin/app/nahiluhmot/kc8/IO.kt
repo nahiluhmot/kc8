@@ -14,7 +14,7 @@ interface IO {
     fun startUp(keyHandler: KeyHandler)
 
     /**
-     * Stop the IO driver. The behavior of other methods is not defined after this method has been
+     * Stop the IO driver. The behavior of other methods is undefined after this method has been
      * called. IO drivers are not expected to be restartable.
      */
     fun shutDown()
@@ -24,7 +24,7 @@ interface IO {
      *
      * @param frameBuffer the buffer to render
      */
-    fun render(frameBuffer: UByteArray)
+    fun render(frameBuffer: FrameBuffer)
 
     /**
      * Start emitting a sound.

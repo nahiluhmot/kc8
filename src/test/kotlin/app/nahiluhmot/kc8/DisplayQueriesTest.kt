@@ -27,4 +27,34 @@ class DisplayQueriesTest {
             }
         }
     }
+
+    @Test
+    fun testAreCoordinatesValid() {
+        for (x in 0 until SCREEN_WIDTH) {
+            for (y in 0 until SCREEN_HEIGHT) {
+                assertTrue(
+                    DisplayQueries.areCoordinatesValid(x, y),
+                    "Expected ($x, $y) to be valid coordinates"
+                )
+            }
+        }
+
+        for (x in listOf(-2, -1, SCREEN_WIDTH, SCREEN_WIDTH + 1)) {
+            for (y in 0 until SCREEN_HEIGHT) {
+                assertFalse(
+                    DisplayQueries.areCoordinatesValid(x, y),
+                    "Expected ($x, $y) to not be valid coordinates"
+                )
+            }
+        }
+
+        for (x in 0 until SCREEN_WIDTH) {
+            for (y in listOf(-2, -1, SCREEN_HEIGHT, SCREEN_HEIGHT + 1)) {
+                assertFalse(
+                    DisplayQueries.areCoordinatesValid(x, y),
+                    "Expected ($x, $y) to not be valid coordinates"
+                )
+            }
+        }
+    }
 }

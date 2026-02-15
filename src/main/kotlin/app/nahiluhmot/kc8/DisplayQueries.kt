@@ -8,8 +8,6 @@ import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
  * Queries made against a Display.
  */
 object DisplayQueries {
-    private const val ZERO: ULong = 0u
-
     /**
      * Test whether a pixel is on.
      *
@@ -19,7 +17,16 @@ object DisplayQueries {
      * @return true if the pixel is on, false otherwise
      */
     fun isPixelOn(display: Display, x: Int, y: Int): Boolean =
-        (x in 0 until SCREEN_WIDTH) &&
-                (y in 0 until SCREEN_HEIGHT) &&
-                (((display[y] shr x) % 2u) > ZERO)
+        areCoordinatesValid(x, y) &&
+                (display[y] and (1uL shl x) != 0uL)
+
+    /**
+     * Test whether (x, y) coordinates are in bounds.
+     *
+     * @param x the x part of the coordinate
+     * @param y the y part of the coordinate
+     * @return true if they're in bounds, false otherwise
+     */
+    fun areCoordinatesValid(x: Int, y: Int): Boolean =
+        (x in 0 until SCREEN_WIDTH) && (y in 0 until SCREEN_HEIGHT)
 }

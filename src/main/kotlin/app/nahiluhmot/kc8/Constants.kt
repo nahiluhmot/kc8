@@ -19,7 +19,7 @@ object Constants {
 
     // Font
 
-    const val FONT_PATH = "/font.c8"
+    const val FONT_PATH = "/font.ch8"
 
     // Screen
 

@@ -11,7 +11,7 @@ The language was used in different CPUs, with clock speeds ranging from 500kHz t
 Chip-8 featured:
 
 * 4kB of memory, with 512B reserved for a builtin font set.
-* A 64x32 frame buffer (2kB)
+* A 64x32 monochrome frame buffer (256B)
 * Sixteen 8-bit registers (`V0-VF`); `VF` is frequently used for special purposes on a per-instruction basis
 * A 64B stack with an 8-bit stack pointer (`SP`)
 * A 16-bit program counter (`PC`)

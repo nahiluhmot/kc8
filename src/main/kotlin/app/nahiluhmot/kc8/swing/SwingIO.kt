@@ -5,6 +5,7 @@ import app.nahiluhmot.kc8.FrameBuffer
 import app.nahiluhmot.kc8.IO
 import app.nahiluhmot.kc8.KeyHandler
 
+@OptIn(ExperimentalUnsignedTypes::class)
 class SwingIO(val scale: Int = Constants.DEFAULT_SCALE) : IO {
     override fun startUp(keyHandler: KeyHandler) {
         TODO("Not yet implemented")

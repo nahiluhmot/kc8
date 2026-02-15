@@ -10,7 +10,7 @@ typealias Memory = UByteArray
 /**
  * Video RAM.
  */
-typealias FrameBuffer = UByteArray
+typealias FrameBuffer = Array<BooleanArray>
 
 /**
  * Op code registers.

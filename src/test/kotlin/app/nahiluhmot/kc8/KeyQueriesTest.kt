@@ -9,7 +9,7 @@ import kotlin.test.assertTrue
 class KeyQueriesTest {
     @Test
     fun testAddKeyToEmpty() {
-        for (key in 0x0u..0xFu) {
+        for (key in Constants.KEY_0..Constants.KEY_F) {
             val expected = (1 shl key.toInt()).toUShort()
 
             assertEquals(
@@ -24,7 +24,7 @@ class KeyQueriesTest {
     fun testAddAllKeys() {
         var keySet: KeySet = 0x0u
 
-        for (key in 0x0u..0xFu) {
+        for (key in Constants.KEY_0..Constants.KEY_F) {
             keySet = KeyQueries.addKey(keySet, key.toUByte())
         }
 
@@ -33,14 +33,14 @@ class KeyQueriesTest {
 
     @Test
     fun testRemoveKeyNotAdded() {
-        assertEquals(0x0u, KeyQueries.removeKey(0x0u, 0xFu))
+        assertEquals(0x0u, KeyQueries.removeKey(0x0u, Constants.KEY_F))
     }
 
     @Test
     fun testRemoveAddedKey() {
         var keySet: KeySet = 0b1000010010000u
 
-        keySet = KeyQueries.removeKey(keySet, 0x7u)
+        keySet = KeyQueries.removeKey(keySet, Constants.KEY_7)
 
         assertEquals(0b1000000010000u, keySet)
     }
@@ -49,18 +49,18 @@ class KeyQueriesTest {
     fun testIsKeySet() {
         val keySet: KeySet = 0b1001u
 
-        assertTrue(KeyQueries.isKeyPressed(keySet, 0x0u))
-        assertFalse(KeyQueries.isKeyPressed(keySet, 0x1u))
-        assertFalse(KeyQueries.isKeyPressed(keySet, 0x2u))
-        assertTrue(KeyQueries.isKeyPressed(keySet, 0x3u))
-        assertFalse(KeyQueries.isKeyPressed(keySet, 0x4u))
+        assertTrue(KeyQueries.isKeyPressed(keySet, Constants.KEY_0))
+        assertFalse(KeyQueries.isKeyPressed(keySet, Constants.KEY_1))
+        assertFalse(KeyQueries.isKeyPressed(keySet, Constants.KEY_2))
+        assertTrue(KeyQueries.isKeyPressed(keySet, Constants.KEY_3))
+        assertFalse(KeyQueries.isKeyPressed(keySet, Constants.KEY_4))
     }
 
     @Test
     fun testGetPressedKey() {
         assertNull(KeyQueries.getPressedKey(0b0u))
-        assertEquals(0x0u, KeyQueries.getPressedKey(0b1u))
-        assertEquals(0x1u, KeyQueries.getPressedKey(0b10u))
-        assertEquals(0x0u, KeyQueries.getPressedKey(0b11u))
+        assertEquals(Constants.KEY_0, KeyQueries.getPressedKey(0b1u))
+        assertEquals(Constants.KEY_1, KeyQueries.getPressedKey(0b10u))
+        assertEquals(Constants.KEY_0, KeyQueries.getPressedKey(0b11u))
     }
 }

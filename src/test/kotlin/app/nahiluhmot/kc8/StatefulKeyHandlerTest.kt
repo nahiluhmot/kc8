@@ -12,9 +12,9 @@ class StatefulKeyHandlerTest {
         val state = State()
         val keyHandler = StatefulKeyHandler(state)
 
-        keyHandler.onKeyDown(0x4u)
+        keyHandler.onKeyDown(Constants.KEY_4)
 
-        assertPressedKeys(state.keySet, setOf(0x4u))
+        assertPressedKeys(state.keySet, setOf(Constants.KEY_4))
     }
 
     @Test
@@ -22,7 +22,7 @@ class StatefulKeyHandlerTest {
         val state = State()
         val keyHandler = StatefulKeyHandler(state)
 
-        keyHandler.onKeyUp(0xEu)
+        keyHandler.onKeyUp(Constants.KEY_E)
 
         assertNoPressedKeys(state.keySet)
     }
@@ -32,8 +32,8 @@ class StatefulKeyHandlerTest {
         val state = State()
         val keyHandler = StatefulKeyHandler(state)
 
-        keyHandler.onKeyDown(0x7u)
-        keyHandler.onKeyUp(0x7u)
+        keyHandler.onKeyDown(Constants.KEY_7)
+        keyHandler.onKeyUp(Constants.KEY_7)
 
         assertNoPressedKeys(state.keySet)
     }
@@ -43,10 +43,10 @@ class StatefulKeyHandlerTest {
         val state = State()
         val keyHandler = StatefulKeyHandler(state)
 
-        keyHandler.onKeyDown(0x1u)
-        keyHandler.onKeyDown(0xBu)
+        keyHandler.onKeyDown(Constants.KEY_1)
+        keyHandler.onKeyDown(Constants.KEY_B)
 
-        assertPressedKeys(state.keySet, setOf(0x1u, 0xBu))
+        assertPressedKeys(state.keySet, setOf(Constants.KEY_1, Constants.KEY_B))
     }
 
     @Test
@@ -56,7 +56,7 @@ class StatefulKeyHandlerTest {
 
         assertNoPressedKeys(state.keySet)
 
-        for (key in 0x0u..0xFu) {
+        for (key in Constants.KEY_0..Constants.KEY_F) {
             keyHandler.onKeyDown(key.toUByte())
             assertPressedKeys(state.keySet, setOf(key.toUByte()))
             keyHandler.onKeyUp(key.toUByte())
@@ -69,13 +69,13 @@ class StatefulKeyHandlerTest {
         val state = State()
         val keyHandler = StatefulKeyHandler(state)
 
-        keyHandler.onKeyDown(0x2u)
-        keyHandler.onKeyDown(0x3u)
-        keyHandler.onKeyUp(0x2u)
-        keyHandler.onKeyUp(0x4u)
-        keyHandler.onKeyDown(0x5u)
+        keyHandler.onKeyDown(Constants.KEY_2)
+        keyHandler.onKeyDown(Constants.KEY_3)
+        keyHandler.onKeyUp(Constants.KEY_2)
+        keyHandler.onKeyUp(Constants.KEY_4)
+        keyHandler.onKeyDown(Constants.KEY_5)
 
-        assertPressedKeys(state.keySet, setOf(0x3u, 0x5u))
+        assertPressedKeys(state.keySet, setOf(Constants.KEY_3, Constants.KEY_5))
     }
 
     private fun assertNoPressedKeys(keySet: KeySet) {
@@ -83,7 +83,7 @@ class StatefulKeyHandlerTest {
     }
 
     private fun assertPressedKeys(keySet: KeySet, expectedKeys: Collection<UByte>) {
-        for (key in 0x0u..0xFu) {
+        for (key in Constants.KEY_0..Constants.KEY_F) {
             if (expectedKeys.contains(key.toUByte())) {
                 assertTrue(KeyQueries.isKeyPressed(keySet, key.toUByte()), "Expected $key to be pressed")
             } else {

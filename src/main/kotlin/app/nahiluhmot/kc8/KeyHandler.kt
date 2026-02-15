@@ -9,12 +9,12 @@ interface KeyHandler {
      *
      * @param key the key that was pressed
      */
-    fun onKeyDown(key: UByte)
+    fun onKeyDown(key: Key)
 
     /**
      * Handle a key up event.
      *
      * @param key the key that was released
      */
-    fun onKeyUp(key: UByte)
+    fun onKeyUp(key: Key)
 }

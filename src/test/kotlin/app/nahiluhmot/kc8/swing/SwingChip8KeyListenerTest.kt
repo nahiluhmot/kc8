@@ -1,5 +1,6 @@
 package app.nahiluhmot.kc8.swing
 
+import app.nahiluhmot.kc8.Constants
 import app.nahiluhmot.kc8.KeyHandler
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -50,22 +51,22 @@ class SwingChip8KeyListenerTest {
         listener.keyPressed(buildEvent(KeyEvent.KEY_PRESSED, KeyEvent.VK_8))
 
         verifyOrder {
-            keyHandler.onKeyDown(0x1u)
-            keyHandler.onKeyDown(0xAu)
-            keyHandler.onKeyDown(0xBu)
-            keyHandler.onKeyDown(0x4u)
-            keyHandler.onKeyDown(0x5u)
-            keyHandler.onKeyDown(0x7u)
-            keyHandler.onKeyDown(0xDu)
-            keyHandler.onKeyDown(0x2u)
-            keyHandler.onKeyDown(0x9u)
-            keyHandler.onKeyDown(0xFu)
-            keyHandler.onKeyDown(0x0u)
-            keyHandler.onKeyDown(0xCu)
-            keyHandler.onKeyDown(0x3u)
-            keyHandler.onKeyDown(0xEu)
-            keyHandler.onKeyDown(0x6u)
-            keyHandler.onKeyDown(0x8u)
+            keyHandler.onKeyDown(Constants.KEY_1)
+            keyHandler.onKeyDown(Constants.KEY_A)
+            keyHandler.onKeyDown(Constants.KEY_B)
+            keyHandler.onKeyDown(Constants.KEY_4)
+            keyHandler.onKeyDown(Constants.KEY_5)
+            keyHandler.onKeyDown(Constants.KEY_7)
+            keyHandler.onKeyDown(Constants.KEY_D)
+            keyHandler.onKeyDown(Constants.KEY_2)
+            keyHandler.onKeyDown(Constants.KEY_9)
+            keyHandler.onKeyDown(Constants.KEY_F)
+            keyHandler.onKeyDown(Constants.KEY_0)
+            keyHandler.onKeyDown(Constants.KEY_C)
+            keyHandler.onKeyDown(Constants.KEY_3)
+            keyHandler.onKeyDown(Constants.KEY_E)
+            keyHandler.onKeyDown(Constants.KEY_6)
+            keyHandler.onKeyDown(Constants.KEY_8)
         }
 
         confirmVerified(keyHandler)
@@ -104,22 +105,22 @@ class SwingChip8KeyListenerTest {
         listener.keyReleased(buildEvent(KeyEvent.KEY_PRESSED, KeyEvent.VK_2))
 
         verifyOrder {
-            keyHandler.onKeyUp(0x9u)
-            keyHandler.onKeyUp(0xFu)
-            keyHandler.onKeyUp(0x0u)
-            keyHandler.onKeyUp(0xCu)
-            keyHandler.onKeyUp(0x3u)
-            keyHandler.onKeyUp(0xEu)
-            keyHandler.onKeyUp(0x6u)
-            keyHandler.onKeyUp(0x8u)
-            keyHandler.onKeyUp(0x1u)
-            keyHandler.onKeyUp(0xAu)
-            keyHandler.onKeyUp(0xBu)
-            keyHandler.onKeyUp(0x4u)
-            keyHandler.onKeyUp(0x5u)
-            keyHandler.onKeyUp(0x7u)
-            keyHandler.onKeyUp(0xDu)
-            keyHandler.onKeyUp(0x2u)
+            keyHandler.onKeyUp(Constants.KEY_9)
+            keyHandler.onKeyUp(Constants.KEY_F)
+            keyHandler.onKeyUp(Constants.KEY_0)
+            keyHandler.onKeyUp(Constants.KEY_C)
+            keyHandler.onKeyUp(Constants.KEY_3)
+            keyHandler.onKeyUp(Constants.KEY_E)
+            keyHandler.onKeyUp(Constants.KEY_6)
+            keyHandler.onKeyUp(Constants.KEY_8)
+            keyHandler.onKeyUp(Constants.KEY_1)
+            keyHandler.onKeyUp(Constants.KEY_A)
+            keyHandler.onKeyUp(Constants.KEY_B)
+            keyHandler.onKeyUp(Constants.KEY_4)
+            keyHandler.onKeyUp(Constants.KEY_5)
+            keyHandler.onKeyUp(Constants.KEY_7)
+            keyHandler.onKeyUp(Constants.KEY_D)
+            keyHandler.onKeyUp(Constants.KEY_2)
         }
 
         confirmVerified(keyHandler)

@@ -27,7 +27,7 @@ interface IO {
     fun render(frameBuffer: FrameBuffer)
 
     /**
-     * Start emitting a sound.
+     * Start emitting a sound. This method should keep playing if the sound has already been started.
      */
     fun startSound()
 

@@ -1,8 +1,9 @@
 package app.nahiluhmot.kc8
 
-private const val ZERO: UShort = 0u
 
 object KeyQueries {
+    private const val ZERO: UShort = 0u
+
     fun addKey(pressedKeys: PressedKeys, key: UByte) =
         pressedKeys or (1 shl key.toInt()).toUShort()
 

@@ -4,19 +4,28 @@ import app.nahiluhmot.kc8.Constants
 import app.nahiluhmot.kc8.FrameBuffer
 import app.nahiluhmot.kc8.IO
 import app.nahiluhmot.kc8.KeyHandler
+import javax.swing.SwingUtilities
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class SwingIO(val scale: Int = Constants.DEFAULT_SCALE) : IO {
+    private lateinit var frame: SwingChip8JFrame
+
     override fun startUp(keyHandler: KeyHandler) {
-        TODO("Not yet implemented")
+        SwingUtilities.invokeLater {
+            frame = SwingChip8JFrame(scale, keyHandler)
+        }
     }
 
     override fun shutDown() {
-        TODO("Not yet implemented")
+        SwingUtilities.invokeLater {
+            frame.dispose()
+        }
     }
 
     override fun render(frameBuffer: FrameBuffer) {
-        TODO("Not yet implemented")
+        SwingUtilities.invokeLater {
+            frame.updateDisplay(frameBuffer)
+        }
     }
 
     override fun startSound() {

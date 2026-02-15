@@ -33,7 +33,7 @@ class SwingChip8JPanel(scale: Int) : JPanel() {
         g2d.drawImage(imageBuffer, 0, 0, scaledWidth, scaledHeight, null)
     }
 
-    fun updateBytes(frameBuffer: FrameBuffer) {
+    fun updateDisplay(frameBuffer: FrameBuffer) {
         val raster = imageBuffer.raster
 
         for (row in 0..<SCREEN_HEIGHT) {

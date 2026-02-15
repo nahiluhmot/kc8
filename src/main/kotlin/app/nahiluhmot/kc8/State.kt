@@ -5,13 +5,14 @@ package app.nahiluhmot.kc8
  * Maintains state of the interpreter.
  */
 class State(
-    val memory: UByteArray = UByteArray(Constants.MEMORY_BYTES),
-    val frameBuffer: UByteArray = UByteArray(Constants.FRAME_BUFFER_BYTES),
-    val registers: UByteArray = UByteArray(Constants.REGISTER_BYTES),
-    val stack: UByteArray = UByteArray(Constants.STACK_BYTES),
-    var stackPointer: UByte = Constants.INITIAL_STACK_POINTER,
-    var delayTimer: UByte = Constants.INITIAL_DELAY_TIMER,
-    var soundTimer: UByte = Constants.INITIAL_SOUND_TIMER,
-    var indexRegister: UShort = Constants.INITIAL_INDEX_REGISTER,
-    var programCounter: UShort = Constants.INITIAL_PROGRAM_COUNTER,
+    val memory: Memory = UByteArray(Constants.MEMORY_BYTES),
+    val frameBuffer: FrameBuffer = UByteArray(Constants.FRAME_BUFFER_BYTES),
+    val registers: Registers = UByteArray(Constants.REGISTER_BYTES),
+    val stack: Stack = UByteArray(Constants.STACK_BYTES),
+    var stackPointer: StackPointer = Constants.INITIAL_STACK_POINTER,
+    var delayTimer: DelayTimer = Constants.INITIAL_DELAY_TIMER,
+    var soundTimer: SoundTimer = Constants.INITIAL_SOUND_TIMER,
+    var indexRegister: IndexRegister = Constants.INITIAL_INDEX_REGISTER,
+    var programCounter: ProgramCounter = Constants.INITIAL_PROGRAM_COUNTER,
+    var pressedKeys: PressedKeys = Constants.DEFAULT_PRESSED_KEYS
 )

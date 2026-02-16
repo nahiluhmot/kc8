@@ -4,7 +4,7 @@ package app.nahiluhmot.kc8
 /**
  * Interface for IO drivers.
  */
-interface IO {
+interface Display {
     /**
      * Start the IO driver. This method is always called first; the behavior of other methods is
      * undefined when this method has not been called.

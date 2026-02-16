@@ -2,14 +2,14 @@
 
 package app.nahiluhmot.kc8
 
-import app.nahiluhmot.kc8.swing.SwingIO
+import app.nahiluhmot.kc8.swing.SwingDisplay
 
 /**
  * Application entrypoint.
  */
 fun main() {
     val state = State()
-    val io = SwingIO()
+    val io = SwingDisplay()
     val keyHandler = StatefulKeyHandler(state)
 
     io.startUp(keyHandler)

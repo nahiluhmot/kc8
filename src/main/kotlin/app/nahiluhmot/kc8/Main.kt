@@ -14,39 +14,39 @@ import app.nahiluhmot.kc8.io.swing.SwingDisplayDriver
  */
 fun main() {
     val state = State()
-    val displayDriver = SwingDisplayDriver()
+    val uiDriver = SwingDisplayDriver()
     val audioDriver = ClipAudioDriver()
     val keyHandler = StatefulKeyHandler(state)
 
     audioDriver.startUp()
-    displayDriver.startUp(keyHandler)
+    uiDriver.startUp(keyHandler)
 
     FontLoader.loadFont(state)
 
     Thread.sleep(1000)
 
     drawPicture1(state)
-    displayDriver.render(state.frameBuffer)
+    uiDriver.render(state.frameBuffer)
     audioDriver.startBeep()
     Thread.sleep(1000)
 
     drawPicture2(state)
-    displayDriver.render(state.frameBuffer)
+    uiDriver.render(state.frameBuffer)
     audioDriver.stopBeep()
     Thread.sleep(1000)
 
     drawPicture2(state)
-    displayDriver.render(state.frameBuffer)
+    uiDriver.render(state.frameBuffer)
     audioDriver.startBeep()
     Thread.sleep(1000)
 
     drawPicture1(state)
-    displayDriver.render(state.frameBuffer)
+    uiDriver.render(state.frameBuffer)
     audioDriver.stopBeep()
     Thread.sleep(1000)
 
     audioDriver.shutDown()
-    displayDriver.shutDown()
+    uiDriver.shutDown()
 }
 
 private fun drawPicture1(state: State) {

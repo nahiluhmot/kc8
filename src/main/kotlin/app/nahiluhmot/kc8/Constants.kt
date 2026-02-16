@@ -25,7 +25,7 @@ object Constants {
     const val MEMORY_BYTES = 4096
     const val REGISTER_BYTES = 16
     const val STACK_BYTES = 64
-    const val INITIAL_STACK_POINTER: StackPointer = 0u
+    const val INITIAL_STACK_POINTER: StackPointer = 0
     const val INITIAL_DELAY_TIMER: DelayTimer = 0u
     const val INITIAL_SOUND_TIMER: SoundTimer = 0u
     const val INITIAL_INDEX_REGISTER: IndexRegister = 0u

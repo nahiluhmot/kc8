@@ -108,7 +108,7 @@ object Decoder {
         OpCode.SetIndex(getLowerAddress(raw).toInt())
 
     private fun decodeB(raw: UInt) =
-        OpCode.RegJump(getLowerAddress(raw).toInt())
+        OpCode.Reg0Jump(getLowerAddress(raw).toInt())
 
     private fun decodeC(raw: UInt) =
         OpCode.Random(getNthNibble(raw, 2).toInt(), getLowerByte(raw).toUByte())

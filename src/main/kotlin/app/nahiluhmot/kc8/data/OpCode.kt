@@ -70,7 +70,7 @@ sealed interface OpCode {
     data class SetIndex(val addr: Address) : OpCode
 
     // Bnnn
-    data class RegJump(val addr: Address) : OpCode
+    data class Reg0Jump(val addr: Address) : OpCode
 
     // Cxkk
     data class Random(val reg: Register, val byte: UByte) : OpCode

@@ -1,7 +1,6 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.data
 
-import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
-import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
+import app.nahiluhmot.kc8.Constants
 
 /**
  * Updates the FrameBuffer.
@@ -19,14 +18,14 @@ object FrameBufferMutations {
      * @return true if any pixels were erased, false if they were not
      */
     fun drawUByte(frameBuffer: FrameBuffer, uByte: UByte, x: Int, y: Int): Boolean {
-        val i = x % SCREEN_WIDTH
-        val j = y % SCREEN_HEIGHT
+        val i = x % Constants.SCREEN_WIDTH
+        val j = y % Constants.SCREEN_HEIGHT
         val row = frameBuffer[j]
         val uLong = reverseBits(uByte).toULong()
         val mainMask = uLong shl i
         val wrapMask =
-            if ((i + 8) > SCREEN_WIDTH) {
-                uLong shr (SCREEN_WIDTH - i)
+            if ((i + 8) > Constants.SCREEN_WIDTH) {
+                uLong shr (Constants.SCREEN_WIDTH - i)
             } else {
                 0uL
             }

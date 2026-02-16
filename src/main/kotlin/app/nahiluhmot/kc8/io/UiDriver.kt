@@ -1,12 +1,14 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.io
+
+import app.nahiluhmot.kc8.data.FrameBuffer
 
 @OptIn(ExperimentalUnsignedTypes::class)
 /**
- * Interface for display drivers.
+ * Interface for UI drivers.
  */
-interface DisplayDriver {
+interface UiDriver {
     /**
-     * Start the display driver. This method is always called first; the behavior of other methods
+     * Start the UI driver. This method is always called first; the behavior of other methods
      * is undefined when this method has not been called.
      *
      * @param keyHandler handles keyboard input
@@ -14,8 +16,8 @@ interface DisplayDriver {
     fun startUp(keyHandler: KeyHandler)
 
     /**
-     * Stop the display driver. The behavior of other methods is undefined after this method has been
-     * called. Display drivers are not expected to be restartable.
+     * Stop the UI driver. The behavior of other methods is undefined after this method has been
+     * called. UI drivers are not expected to be restartable.
      */
     fun shutDown()
 

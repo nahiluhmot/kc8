@@ -1,5 +1,7 @@
 package app.nahiluhmot.kc8
 
+import app.nahiluhmot.kc8.data.State
+import app.nahiluhmot.kc8.io.FontLoader
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

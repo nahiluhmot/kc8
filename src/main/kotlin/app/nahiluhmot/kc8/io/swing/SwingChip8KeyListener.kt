@@ -1,8 +1,8 @@
-package app.nahiluhmot.kc8.swing
+package app.nahiluhmot.kc8.io.swing
 
 import app.nahiluhmot.kc8.Constants
-import app.nahiluhmot.kc8.Key
-import app.nahiluhmot.kc8.KeyHandler
+import app.nahiluhmot.kc8.data.Key
+import app.nahiluhmot.kc8.io.KeyHandler
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 

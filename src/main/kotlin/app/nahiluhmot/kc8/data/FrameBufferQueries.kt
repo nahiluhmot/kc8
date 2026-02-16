@@ -1,7 +1,6 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.data
 
-import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
-import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
+import app.nahiluhmot.kc8.Constants
 
 @OptIn(ExperimentalUnsignedTypes::class)
 /**
@@ -28,5 +27,5 @@ object FrameBufferQueries {
      * @return true if they're in bounds, false otherwise
      */
     fun areCoordinatesValid(x: Int, y: Int): Boolean =
-        (x in 0 until SCREEN_WIDTH) && (y in 0 until SCREEN_HEIGHT)
+        (x in 0 until Constants.SCREEN_WIDTH) && (y in 0 until Constants.SCREEN_HEIGHT)
 }

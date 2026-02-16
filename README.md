@@ -73,8 +73,8 @@ Its members will be public to the rest of the interpreter, so that the CPU & IO 
 
 ### IO
 
-We'll define an interface, `IO`, which will have methods for rendering the VRAM to the screen and checking if keys are pressed.
-For the first pass, we'll implement a `SwingIO` class using Java's builtin Swing framework.
+We'll define interfaces for a `DisplayDriver` and `AudioDriver`.
+The `DisplayDriver` implementation will be powered by `Swing` at first; `AudioDriver` by `Clip`.
 
 ### CPU
 
@@ -82,9 +82,9 @@ We'll define a sealed interface, `OpCode`, which will contain variants for each 
 A `Decoder` class will be responsible for parsing op codes.
 A `CPU` class will be responsible for executing op codes, R/W with the `State` object, and interfacing with the `IO` system.
 
-### Driver
+### Emulator
 
-A `Driver` object will:
+A `Emulator` object will:
 
 * Initialize the I/O system
 * Load the font set

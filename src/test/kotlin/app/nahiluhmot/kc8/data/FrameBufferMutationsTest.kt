@@ -1,11 +1,11 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.data
 
-import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
+import app.nahiluhmot.kc8.Constants
 import kotlin.test.*
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class FrameBufferMutationsTest {
-    private val frameBuffer = ULongArray(SCREEN_HEIGHT)
+    private val frameBuffer = ULongArray(Constants.SCREEN_HEIGHT)
 
     @BeforeTest
     fun setup() {

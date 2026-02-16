@@ -1,5 +1,4 @@
-package app.nahiluhmot.kc8
-
+package app.nahiluhmot.kc8.data
 
 /**
  * Queries against a KeySet.

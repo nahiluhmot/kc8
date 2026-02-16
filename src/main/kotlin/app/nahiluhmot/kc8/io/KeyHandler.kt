@@ -1,4 +1,6 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.io
+
+import app.nahiluhmot.kc8.data.Key
 
 /**
  * Interface for keyboard input handlers. Valid keys are 0-9, A-F, represented as bytes.

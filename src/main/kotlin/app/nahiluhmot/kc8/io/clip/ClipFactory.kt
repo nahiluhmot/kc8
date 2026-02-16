@@ -1,4 +1,4 @@
-package app.nahiluhmot.kc8.clip
+package app.nahiluhmot.kc8.io.clip
 
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem

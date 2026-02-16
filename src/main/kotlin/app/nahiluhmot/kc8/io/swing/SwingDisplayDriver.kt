@@ -1,9 +1,9 @@
-package app.nahiluhmot.kc8.swing
+package app.nahiluhmot.kc8.io.swing
 
 import app.nahiluhmot.kc8.Constants
-import app.nahiluhmot.kc8.DisplayDriver
-import app.nahiluhmot.kc8.FrameBuffer
-import app.nahiluhmot.kc8.KeyHandler
+import app.nahiluhmot.kc8.data.FrameBuffer
+import app.nahiluhmot.kc8.io.KeyHandler
+import app.nahiluhmot.kc8.io.UiDriver
 import javax.swing.SwingUtilities
 
 @OptIn(ExperimentalUnsignedTypes::class)
@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities
  *
  * @param scale the scale of the rendered image
  */
-class SwingDisplayDriver(val scale: Int = Constants.DEFAULT_SCALE) : DisplayDriver {
+class SwingDisplayDriver(val scale: Int = Constants.DEFAULT_SCALE) : UiDriver {
     private val panel = SwingChip8JPanel(scale)
     private lateinit var frame: SwingChip8JFrame
 

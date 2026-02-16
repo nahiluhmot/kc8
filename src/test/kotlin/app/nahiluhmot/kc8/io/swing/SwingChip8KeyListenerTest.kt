@@ -1,7 +1,7 @@
-package app.nahiluhmot.kc8.swing
+package app.nahiluhmot.kc8.io.swing
 
 import app.nahiluhmot.kc8.Constants
-import app.nahiluhmot.kc8.KeyHandler
+import app.nahiluhmot.kc8.io.KeyHandler
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import java.awt.event.KeyEvent

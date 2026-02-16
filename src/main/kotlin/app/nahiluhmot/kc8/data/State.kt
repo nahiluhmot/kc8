@@ -1,4 +1,6 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.data
+
+import app.nahiluhmot.kc8.Constants
 
 @OptIn(ExperimentalUnsignedTypes::class)
 /**

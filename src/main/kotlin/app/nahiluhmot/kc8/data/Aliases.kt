@@ -1,6 +1,4 @@
-@file:OptIn(ExperimentalUnsignedTypes::class)
-
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.data
 
 /**
  * Block of memory for fonts, programs, and general program usage.

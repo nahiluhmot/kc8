@@ -1,5 +1,7 @@
 package app.nahiluhmot.kc8
 
+import app.nahiluhmot.kc8.data.*
+
 /**
  * Application constants.
  */

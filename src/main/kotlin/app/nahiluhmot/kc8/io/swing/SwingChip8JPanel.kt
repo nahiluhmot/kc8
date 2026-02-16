@@ -1,9 +1,9 @@
-package app.nahiluhmot.kc8.swing
+package app.nahiluhmot.kc8.io.swing
 
 import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
 import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
-import app.nahiluhmot.kc8.FrameBuffer
-import app.nahiluhmot.kc8.FrameBufferQueries
+import app.nahiluhmot.kc8.data.FrameBuffer
+import app.nahiluhmot.kc8.data.FrameBufferQueries
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D

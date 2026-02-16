@@ -1,4 +1,4 @@
-package app.nahiluhmot.kc8.swing
+package app.nahiluhmot.kc8.io.swing
 
 import app.nahiluhmot.kc8.Constants.APPLICATION_NAME
 import java.awt.event.KeyListener

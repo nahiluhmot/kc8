@@ -1,4 +1,4 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.io
 
 /**
  * Interface for audio drivers.

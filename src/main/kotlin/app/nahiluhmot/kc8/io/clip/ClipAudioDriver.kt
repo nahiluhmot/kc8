@@ -1,6 +1,6 @@
-package app.nahiluhmot.kc8.clip
+package app.nahiluhmot.kc8.io.clip
 
-import app.nahiluhmot.kc8.AudioDriver
+import app.nahiluhmot.kc8.io.AudioDriver
 import javax.sound.sampled.Clip
 
 class ClipAudioDriver(val clip: Clip = ClipFactory.build()) : AudioDriver {

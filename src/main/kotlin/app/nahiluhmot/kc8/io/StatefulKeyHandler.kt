@@ -1,4 +1,8 @@
-package app.nahiluhmot.kc8
+package app.nahiluhmot.kc8.io
+
+import app.nahiluhmot.kc8.data.Key
+import app.nahiluhmot.kc8.data.KeySetQueries
+import app.nahiluhmot.kc8.data.State
 
 /**
  * Handles updates to the state's currently pressed keys.

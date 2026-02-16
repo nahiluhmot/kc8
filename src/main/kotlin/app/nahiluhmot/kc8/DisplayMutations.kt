@@ -36,6 +36,15 @@ object DisplayMutations {
         return (row and updatedRow.inv()) != 0uL
     }
 
+    /**
+     * Clear the Display.
+     *
+     * @param display the Display to clear.
+     */
+    fun clear(display: Display) {
+        display.fill(0uL)
+    }
+
     private fun reverseBits(uByte: UByte): UByte {
         var b = uByte.toInt()
 

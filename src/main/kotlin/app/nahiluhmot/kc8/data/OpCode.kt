@@ -28,7 +28,7 @@ sealed interface OpCode {
     data class SkipNotEqual(val reg: Register, val byte: UByte) : OpCode
 
     // 5xy0
-    data class SkipRegEqual(val left: Register, val right: UByte) : OpCode
+    data class SkipRegEqual(val left: Register, val right: Register) : OpCode
 
     // 6xkk
     data class Load(val reg: Register, val byte: UByte) : OpCode
@@ -67,16 +67,16 @@ sealed interface OpCode {
     data class SkipRegNotEqual(val left: Register, val right: Register) : OpCode
 
     // Annn
-    data class SetIndex(val addr: Address)
+    data class SetIndex(val addr: Address) : OpCode
 
     // Bnnn
-    data class RegJump(val addr: Address)
+    data class RegJump(val addr: Address) : OpCode
 
     // Cxkk
     data class Random(val reg: Register, val byte: UByte) : OpCode
 
     // Dxyn
-    data class Draw(val x: Register, val y: Register, val height: UByte) : OpCode
+    data class Draw(val x: Register, val y: Register, val height: Int) : OpCode
 
     // Ex9E
     data class SkipKey(val reg: Register) : OpCode
@@ -103,10 +103,10 @@ sealed interface OpCode {
     data class LoadSprite(val reg: Register) : OpCode
 
     // Fx33
-    data class WriteBcd(val reg: Register) : OpCode
+    data class StoreBcd(val reg: Register) : OpCode
 
     // Fx55
-    data class WriteRegisters(val reg: Register) : OpCode
+    data class StoreRegisters(val reg: Register) : OpCode
 
     // Fx65
     data class LoadRegisters(val reg: Register) : OpCode

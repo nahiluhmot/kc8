@@ -18,23 +18,23 @@ fun main() {
 
     Thread.sleep(1000)
 
-    while (true) {
-        drawPicture1(state)
-        io.render(state.display)
-        Thread.sleep(1000)
+    drawPicture1(state)
+    io.render(state.display)
+    Thread.sleep(1000)
 
-        drawPicture2(state)
-        io.render(state.display)
-        Thread.sleep(1000)
+    drawPicture2(state)
+    io.render(state.display)
+    Thread.sleep(1000)
 
-        drawPicture2(state)
-        io.render(state.display)
-        Thread.sleep(1000)
+    drawPicture2(state)
+    io.render(state.display)
+    Thread.sleep(1000)
 
-        drawPicture1(state)
-        io.render(state.display)
-        Thread.sleep(1000)
-    }
+    drawPicture1(state)
+    io.render(state.display)
+    Thread.sleep(1000)
+
+    io.shutDown()
 }
 
 private fun drawPicture1(state: State) {

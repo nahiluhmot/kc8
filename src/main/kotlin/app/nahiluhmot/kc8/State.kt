@@ -6,7 +6,6 @@ package app.nahiluhmot.kc8
  */
 class State(
     val memory: Memory = UByteArray(Constants.MEMORY_BYTES),
-    val frameBuffer: FrameBuffer = Array(Constants.SCREEN_HEIGHT) { BooleanArray(Constants.SCREEN_WIDTH) },
     val display: Display = ULongArray(Constants.SCREEN_HEIGHT),
     val registers: Registers = UByteArray(Constants.REGISTER_BYTES),
     val stack: Stack = UByteArray(Constants.STACK_BYTES),

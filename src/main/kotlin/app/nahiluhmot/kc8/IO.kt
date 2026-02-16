@@ -22,9 +22,9 @@ interface IO {
     /**
      * Render a buffer to the screen.
      *
-     * @param frameBuffer the buffer to render
+     * @param display the buffer to render
      */
-    fun render(frameBuffer: FrameBuffer)
+    fun render(display: Display)
 
     /**
      * Start emitting a sound. This method should keep playing if the sound has already been started.

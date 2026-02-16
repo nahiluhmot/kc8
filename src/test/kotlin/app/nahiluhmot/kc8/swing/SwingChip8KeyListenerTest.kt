@@ -4,9 +4,9 @@ import app.nahiluhmot.kc8.Constants
 import app.nahiluhmot.kc8.KeyHandler
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import org.junit.jupiter.api.BeforeEach
 import java.awt.event.KeyEvent
 import javax.swing.JPanel
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class SwingChip8KeyListenerTest {
@@ -15,7 +15,7 @@ class SwingChip8KeyListenerTest {
 
     private val component = JPanel()
 
-    @BeforeEach
+    @BeforeTest
     fun setUp() = MockKAnnotations.init(this)
 
     @Test

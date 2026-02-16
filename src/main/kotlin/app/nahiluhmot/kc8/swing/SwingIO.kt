@@ -1,7 +1,7 @@
 package app.nahiluhmot.kc8.swing
 
 import app.nahiluhmot.kc8.Constants
-import app.nahiluhmot.kc8.FrameBuffer
+import app.nahiluhmot.kc8.Display
 import app.nahiluhmot.kc8.IO
 import app.nahiluhmot.kc8.KeyHandler
 import javax.swing.SwingUtilities
@@ -30,9 +30,9 @@ class SwingIO(val scale: Int = Constants.DEFAULT_SCALE) : IO {
         }
     }
 
-    override fun render(frameBuffer: FrameBuffer) {
+    override fun render(display: Display) {
         SwingUtilities.invokeLater {
-            panel.updateDisplay(frameBuffer)
+            panel.updateDisplay(display)
         }
     }
 

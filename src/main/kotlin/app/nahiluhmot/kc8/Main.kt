@@ -1,7 +1,7 @@
+@file:OptIn(ExperimentalUnsignedTypes::class)
+
 package app.nahiluhmot.kc8
 
-import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
-import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
 import app.nahiluhmot.kc8.swing.SwingIO
 
 /**
@@ -14,25 +14,48 @@ fun main() {
 
     io.startUp(keyHandler)
 
+    FontLoader.loadFont(state)
+
+    Thread.sleep(1000)
+
     while (true) {
-        for (row in 0..<SCREEN_HEIGHT) {
-            for (column in 0..<SCREEN_WIDTH) {
-                state.frameBuffer[row][column] = ((row + column) % 2) == 0
-            }
-        }
+        drawPicture1(state)
+        io.render(state.display)
+        Thread.sleep(1000)
 
-        io.render(state.frameBuffer)
+        drawPicture2(state)
+        io.render(state.display)
+        Thread.sleep(1000)
 
-        Thread.sleep(500)
+        drawPicture2(state)
+        io.render(state.display)
+        Thread.sleep(1000)
 
-        for (row in 0..<SCREEN_HEIGHT) {
-            for (column in 0..<SCREEN_WIDTH) {
-                state.frameBuffer[row][column] = ((row + column) % 2) != 0
-            }
-        }
+        drawPicture1(state)
+        io.render(state.display)
+        Thread.sleep(1000)
+    }
+}
 
-        io.render(state.frameBuffer)
+private fun drawPicture1(state: State) {
+    for (i in 0..7) {
+        drawSprite(state, i * 5, 5 * (i + 1), 5, 5)
+    }
+}
 
-        Thread.sleep(500)
+private fun drawPicture2(state: State) {
+    for (i in 8..15) {
+        drawSprite(state, i * 5, (5 * i) - 20, 21, 5)
+    }
+}
+
+private fun drawSprite(state: State, addr: Int, x: Int, y: Int, height: Int) {
+    for (i in 0 until height) {
+        DisplayMutations.drawUByte(
+            state.display,
+            state.memory[addr + i],
+            x,
+            y + i,
+        )
     }
 }

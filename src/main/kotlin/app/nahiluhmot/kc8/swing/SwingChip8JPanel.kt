@@ -2,7 +2,8 @@ package app.nahiluhmot.kc8.swing
 
 import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
 import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
-import app.nahiluhmot.kc8.FrameBuffer
+import app.nahiluhmot.kc8.Display
+import app.nahiluhmot.kc8.DisplayQueries
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -39,21 +40,18 @@ class SwingChip8JPanel(scale: Int) : JPanel() {
     }
 
     /**
-     * Write a new image to the display.
+     * Update the display.
      *
-     * @param frameBuffer the image to write.
+     * @param display the image to display.
      */
-    fun updateDisplay(frameBuffer: FrameBuffer) {
+    fun updateDisplay(display: Display) {
         val raster = imageBuffer.raster
 
-        for (row in 0..<SCREEN_HEIGHT) {
-            val rowArray = frameBuffer[row]
+        for (x in 0..<SCREEN_WIDTH) {
+            for (y in 0..<SCREEN_HEIGHT) {
+                val pixel = if (DisplayQueries.isPixelOn(display, x, y)) 1 else 0
 
-            for (column in 0..<SCREEN_WIDTH) {
-                val cell = rowArray[column]
-                val pixel = if (cell) 1 else 0
-
-                raster.setSample(column, row, 0, pixel)
+                raster.setSample(x, y, 0, pixel)
             }
         }
 

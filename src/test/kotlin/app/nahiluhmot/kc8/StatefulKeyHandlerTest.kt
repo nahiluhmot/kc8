@@ -1,9 +1,9 @@
 package app.nahiluhmot.kc8
 
-import org.junit.jupiter.api.Assertions.assertTrue
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class StatefulKeyHandlerTest {

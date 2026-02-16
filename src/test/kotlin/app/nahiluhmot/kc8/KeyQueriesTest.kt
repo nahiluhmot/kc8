@@ -1,10 +1,6 @@
 package app.nahiluhmot.kc8
 
-import org.junit.jupiter.api.Assertions.assertFalse
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class KeyQueriesTest {
     @Test

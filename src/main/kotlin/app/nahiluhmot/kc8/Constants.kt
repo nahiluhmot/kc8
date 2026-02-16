@@ -21,7 +21,6 @@ object Constants {
     // State
 
     const val MEMORY_BYTES = 4096
-    const val FRAME_BUFFER_BYTES = 256 // (64 * 32) / 8
     const val REGISTER_BYTES = 16
     const val STACK_BYTES = 64
     const val INITIAL_STACK_POINTER: StackPointer = 0u

@@ -2,7 +2,7 @@ package app.nahiluhmot.kc8
 
 import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
 import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 

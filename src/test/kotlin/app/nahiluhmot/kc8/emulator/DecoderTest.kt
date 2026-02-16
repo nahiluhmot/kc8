@@ -1,5 +1,6 @@
-package app.nahiluhmot.kc8.data
+package app.nahiluhmot.kc8.emulator
 
+import app.nahiluhmot.kc8.data.OpCode
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

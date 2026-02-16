@@ -25,14 +25,4 @@ interface IO {
      * @param frameBuffer the buffer to render
      */
     fun render(frameBuffer: FrameBuffer)
-
-    /**
-     * Start emitting a sound. This method should keep playing if the sound has already been started.
-     */
-    fun startSound()
-
-    /**
-     * Stop emitting a sound.
-     */
-    fun stopSound()
 }

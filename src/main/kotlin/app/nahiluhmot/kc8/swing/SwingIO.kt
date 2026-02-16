@@ -35,12 +35,4 @@ class SwingIO(val scale: Int = Constants.DEFAULT_SCALE) : IO {
             panel.updateDisplay(frameBuffer)
         }
     }
-
-    override fun startSound() {
-        TODO("Not yet implemented")
-    }
-
-    override fun stopSound() {
-        TODO("Not yet implemented")
-    }
 }

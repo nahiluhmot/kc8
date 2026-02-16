@@ -85,16 +85,16 @@ class StatefulKeyHandlerTest {
     private fun assertPressedKeys(keySet: KeySet, expectedKeys: Collection<UByte>) {
         for (key in Constants.KEY_0..Constants.KEY_F) {
             if (expectedKeys.contains(key.toUByte())) {
-                assertTrue(KeyQueries.isKeyPressed(keySet, key.toUByte()), "Expected $key to be pressed")
+                assertTrue(KeySetQueries.isKeyPressed(keySet, key.toUByte()), "Expected $key to be pressed")
             } else {
                 assertFalse(
-                    KeyQueries.isKeyPressed(keySet, key.toUByte()),
+                    KeySetQueries.isKeyPressed(keySet, key.toUByte()),
                     "Expected $key to not be pressed"
                 )
             }
         }
 
-        val pressedKey = KeyQueries.getPressedKey(keySet)
+        val pressedKey = KeySetQueries.getPressedKey(keySet)
 
         if (expectedKeys.isEmpty()) {
             assertNull(pressedKey)

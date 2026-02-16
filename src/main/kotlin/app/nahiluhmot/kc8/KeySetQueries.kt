@@ -4,7 +4,7 @@ package app.nahiluhmot.kc8
 /**
  * Queries against a KeySet.
  */
-object KeyQueries {
+object KeySetQueries {
     private const val ZERO: UShort = 0u
 
     /**

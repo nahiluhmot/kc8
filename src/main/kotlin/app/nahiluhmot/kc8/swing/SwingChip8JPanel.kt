@@ -40,7 +40,7 @@ class SwingChip8JPanel(scale: Int) : JPanel() {
     }
 
     /**
-     * Update the FrameBuffer.
+     * Render the frame.
      *
      * @param frameBuffer the image to display.
      */

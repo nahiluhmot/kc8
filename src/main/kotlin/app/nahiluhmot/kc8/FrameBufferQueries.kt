@@ -5,20 +5,20 @@ import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
 
 @OptIn(ExperimentalUnsignedTypes::class)
 /**
- * Queries made against a Display.
+ * Queries made against a FrameBuffer.
  */
-object DisplayQueries {
+object FrameBufferQueries {
     /**
      * Test whether a pixel is on.
      *
-     * @param display the Display to test
+     * @param frameBuffer the FrameBuffer to test
      * @param x the column to test
      * @param y the row to test
      * @return true if the pixel is on, false otherwise
      */
-    fun isPixelOn(display: Display, x: Int, y: Int): Boolean =
+    fun isPixelOn(frameBuffer: FrameBuffer, x: Int, y: Int): Boolean =
         areCoordinatesValid(x, y) &&
-                (display[y] and (1uL shl x) != 0uL)
+                (frameBuffer[y] and (1uL shl x) != 0uL)
 
     /**
      * Test whether (x, y) coordinates are in bounds.

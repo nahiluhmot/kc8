@@ -4,23 +4,24 @@ import app.nahiluhmot.kc8.Constants.SCREEN_HEIGHT
 import app.nahiluhmot.kc8.Constants.SCREEN_WIDTH
 
 /**
- * Updates the Display.
+ * Updates the FrameBuffer.
  */
 @OptIn(ExperimentalUnsignedTypes::class)
-object DisplayMutations {
+object FrameBufferMutations {
     /**
-     * Draws a Byte onto the display. Bytes are XOR'd onto the existing display.
+     * Draws a Byte onto the FrameBuffer. Bytes are XORed onto the existing FrameBuffer.
+     * We also have to reverse the sprites.
      *
-     * @param display the Display to update
+     * @param frameBuffer the FrameBuffer to update
      * @param uByte the byte to draw
      * @param x the starting x coordinate
      * @param y the y coordinate
      * @return true if any pixels were erased, false if they were not
      */
-    fun drawUByte(display: Display, uByte: UByte, x: Int, y: Int): Boolean {
+    fun drawUByte(frameBuffer: FrameBuffer, uByte: UByte, x: Int, y: Int): Boolean {
         val i = x % SCREEN_WIDTH
         val j = y % SCREEN_HEIGHT
-        val row = display[j]
+        val row = frameBuffer[j]
         val uLong = reverseBits(uByte).toULong()
         val mainMask = uLong shl i
         val wrapMask =
@@ -31,18 +32,18 @@ object DisplayMutations {
             }
         val updatedRow = row xor mainMask xor wrapMask
 
-        display[j] = updatedRow
+        frameBuffer[j] = updatedRow
 
         return (row and updatedRow.inv()) != 0uL
     }
 
     /**
-     * Clear the Display.
+     * Clear the FrameBuffer.
      *
-     * @param display the Display to clear.
+     * @param frameBuffer the FrameBuffer to clear.
      */
-    fun clear(display: Display) {
-        display.fill(0uL)
+    fun clear(frameBuffer: FrameBuffer) {
+        frameBuffer.fill(0uL)
     }
 
     private fun reverseBits(uByte: UByte): UByte {

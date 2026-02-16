@@ -19,19 +19,19 @@ fun main() {
     Thread.sleep(1000)
 
     drawPicture1(state)
-    io.render(state.display)
+    io.render(state.frameBuffer)
     Thread.sleep(1000)
 
     drawPicture2(state)
-    io.render(state.display)
+    io.render(state.frameBuffer)
     Thread.sleep(1000)
 
     drawPicture2(state)
-    io.render(state.display)
+    io.render(state.frameBuffer)
     Thread.sleep(1000)
 
     drawPicture1(state)
-    io.render(state.display)
+    io.render(state.frameBuffer)
     Thread.sleep(1000)
 
     io.shutDown()
@@ -51,8 +51,8 @@ private fun drawPicture2(state: State) {
 
 private fun drawSprite(state: State, addr: Int, x: Int, y: Int, height: Int) {
     for (i in 0 until height) {
-        DisplayMutations.drawUByte(
-            state.display,
+        FrameBufferMutations.drawUByte(
+            state.frameBuffer,
             state.memory[addr + i],
             x,
             y + i,

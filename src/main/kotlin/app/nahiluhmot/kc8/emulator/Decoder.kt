@@ -90,9 +90,9 @@ object Decoder {
             0x3u -> OpCode.RegXor(getNthNibble(raw, 2).toInt(), getNthNibble(raw, 1).toInt())
             0x4u -> OpCode.RegAdd(getNthNibble(raw, 2).toInt(), getNthNibble(raw, 1).toInt())
             0x5u -> OpCode.RegSub(getNthNibble(raw, 2).toInt(), getNthNibble(raw, 1).toInt())
-            0x6u -> OpCode.ShiftRight(getNthNibble(raw, 2).toInt())
+            0x6u -> OpCode.RegShiftR(getNthNibble(raw, 2).toInt())
             0x7u -> OpCode.RegSubReverse(getNthNibble(raw, 2).toInt(), getNthNibble(raw, 1).toInt())
-            0xEu -> OpCode.ShiftLeft(getNthNibble(raw, 2).toInt())
+            0xEu -> OpCode.RegShiftL(getNthNibble(raw, 2).toInt())
             else -> null
         }
 
@@ -131,7 +131,7 @@ object Decoder {
 
     private fun decodeF(raw: UInt) =
         when (getLowerByte(raw)) {
-            0x07u -> OpCode.SetToDelay(getNthNibble(raw, 2).toInt())
+            0x07u -> OpCode.LoadDelay(getNthNibble(raw, 2).toInt())
             0x0Au -> OpCode.WaitForKey(getNthNibble(raw, 2).toInt())
             0x15u -> OpCode.SetDelay(getNthNibble(raw, 2).toInt())
             0x18u -> OpCode.SetSound(getNthNibble(raw, 2).toInt())

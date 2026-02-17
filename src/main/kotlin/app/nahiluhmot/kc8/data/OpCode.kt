@@ -55,13 +55,13 @@ sealed interface OpCode {
     data class RegSub(val dst: Register, val src: Register) : OpCode
 
     // 8xy6
-    data class ShiftRight(val reg: Register) : OpCode
+    data class RegShiftR(val reg: Register) : OpCode
 
     // 8xy7
     data class RegSubReverse(val dst: Register, val src: Register) : OpCode
 
     // 8xyE
-    data class ShiftLeft(val reg: Register) : OpCode
+    data class RegShiftL(val reg: Register) : OpCode
 
     // 9xy0
     data class SkipRegNotEqual(val left: Register, val right: Register) : OpCode
@@ -85,7 +85,7 @@ sealed interface OpCode {
     data class SkipNotKey(val reg: Register) : OpCode
 
     // Fx07
-    data class SetToDelay(val reg: Register) : OpCode
+    data class LoadDelay(val reg: Register) : OpCode
 
     // Fx0A
     data class WaitForKey(val reg: Register) : OpCode

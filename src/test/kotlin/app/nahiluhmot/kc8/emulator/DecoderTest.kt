@@ -137,7 +137,7 @@ class DecoderTest {
     @Test
     fun testDecodeShiftRight() {
         assertEquals(
-            OpCode.ShiftRight(0xD),
+            OpCode.RegShiftR(0xD),
             Decoder.decode(0x8DE6u)
         )
     }
@@ -153,7 +153,7 @@ class DecoderTest {
     @Test
     fun testDecodeShiftLeft() {
         assertEquals(
-            OpCode.ShiftLeft(0xC),
+            OpCode.RegShiftL(0xC),
             Decoder.decode(0x8CFEu)
         )
     }
@@ -217,7 +217,7 @@ class DecoderTest {
     @Test
     fun testDecodeSetToDelay() {
         assertEquals(
-            OpCode.SetToDelay(0x3),
+            OpCode.LoadDelay(0x3),
             Decoder.decode(0xF307u)
         )
     }

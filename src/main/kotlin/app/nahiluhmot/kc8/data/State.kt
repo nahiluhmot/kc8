@@ -10,7 +10,7 @@ class State(
     val memory: Memory = UByteArray(Constants.MEMORY_BYTES),
     val frameBuffer: FrameBuffer = ULongArray(Constants.SCREEN_HEIGHT),
     val registers: Registers = UByteArray(Constants.REGISTER_BYTES),
-    val stack: Stack = UByteArray(Constants.STACK_BYTES),
+    val stack: Stack = IntArray(Constants.STACK_BYTES),
     var stackPointer: StackPointer = Constants.INITIAL_STACK_POINTER,
     var delayTimer: DelayTimer = Constants.INITIAL_DELAY_TIMER,
     var soundTimer: SoundTimer = Constants.INITIAL_SOUND_TIMER,

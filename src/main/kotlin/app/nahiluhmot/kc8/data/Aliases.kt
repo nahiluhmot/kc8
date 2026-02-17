@@ -31,7 +31,7 @@ typealias Register = Int
 /**
  * Program stack.
  */
-typealias Stack = UByteArray
+typealias Stack = IntArray
 
 /**
  * Pointer to the current stack.
@@ -51,12 +51,12 @@ typealias SoundTimer = UByte
 /**
  * Index register.
  */
-typealias IndexRegister = UShort
+typealias IndexRegister = Int
 
 /**
  * Program counter.
  */
-typealias ProgramCounter = UShort
+typealias ProgramCounter = Int
 
 /**
  * Chip-8 supports key-presses on 0-9, A-F.

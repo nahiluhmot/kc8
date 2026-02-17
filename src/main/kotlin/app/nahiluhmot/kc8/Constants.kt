@@ -28,8 +28,8 @@ object Constants {
     const val INITIAL_STACK_POINTER: StackPointer = 0
     const val INITIAL_DELAY_TIMER: DelayTimer = 0u
     const val INITIAL_SOUND_TIMER: SoundTimer = 0u
-    const val INITIAL_INDEX_REGISTER: IndexRegister = 0u
-    const val INITIAL_PROGRAM_COUNTER: ProgramCounter = 0x200u
+    const val INITIAL_INDEX_REGISTER: IndexRegister = 0
+    const val INITIAL_PROGRAM_COUNTER: ProgramCounter = 0x200
     const val DEFAULT_PRESSED_KEYS: KeySet = 0u
 
     // Keys

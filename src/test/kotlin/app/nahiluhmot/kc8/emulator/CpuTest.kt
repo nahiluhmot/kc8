@@ -31,6 +31,16 @@ class CpuTest {
     }
 
     @Test
+    fun testDecodeAndExecute() {
+        writeOpCode(0x1738u) // JUMP 0x738
+
+        cpu.decodeAndExecute()
+
+        assertZeros(skipProgramCounter = true, skipMemory = true)
+        assertEquals(0x738, state.programCounter)
+    }
+
+    @Test
     fun testDecodeOpCodeValid() {
         writeOpCode(0x00E0u)
 

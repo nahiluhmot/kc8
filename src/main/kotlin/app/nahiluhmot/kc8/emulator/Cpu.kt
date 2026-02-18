@@ -5,7 +5,6 @@ import app.nahiluhmot.kc8.data.KeySetQueries
 import app.nahiluhmot.kc8.data.OpCode
 import app.nahiluhmot.kc8.data.State
 import kotlin.random.Random
-import kotlin.random.nextUInt
 
 /**
  * Executes OpCodes.
@@ -17,6 +16,8 @@ import kotlin.random.nextUInt
 class Cpu(val state: State, val rng: Random = Random.Default) {
     /**
      * Decodes the op code at the current program counter and executes it.
+     *
+     * @throws IllegalStateException when the op code is invalid
      */
     fun decodeAndExecute() {
         val opCode = decodeOpCode()
@@ -35,8 +36,7 @@ class Cpu(val state: State, val rng: Random = Random.Default) {
         val lower = state.memory[state.programCounter + 1].toUInt()
         val raw = (upper shl 8) or lower
 
-        return Decoder.decode(raw)
-            ?: throw IllegalStateException("Invalid op code at 0x${state.programCounter.toHexString()}: 0x${raw.toHexString()}")
+        return Decoder.decode(raw) ?: throw IllegalStateException("Unknown opcode $raw")
     }
 
     /**
@@ -204,7 +204,7 @@ class Cpu(val state: State, val rng: Random = Random.Default) {
     }
 
     private fun executeRandom(opCode: OpCode.Random): Boolean {
-        state.registers[opCode.reg] = rng.nextUInt().toUByte() and opCode.byte
+        state.registers[opCode.reg] = rng.nextInt().toUByte() and opCode.byte
 
         return true
     }
@@ -303,19 +303,19 @@ class Cpu(val state: State, val rng: Random = Random.Default) {
         if (state.registers[opCode.left] == state.registers[opCode.right]) {
             state.programCounter += 4
 
-            return true
-        } else {
             return false
+        } else {
+            return true
         }
     }
 
     private fun executeSkipRegNotEqual(opCode: OpCode.SkipRegNotEqual): Boolean {
         if (state.registers[opCode.left] == state.registers[opCode.right]) {
-            return false
+            return true
         } else {
             state.programCounter += 4
 
-            return true
+            return false
         }
     }
 
@@ -341,7 +341,7 @@ class Cpu(val state: State, val rng: Random = Random.Default) {
 
     private fun executeCall(opCode: OpCode.Call): Boolean {
         state.stackPointer += 1
-        state.stack[state.stackPointer] = state.programCounter
+        state.stack[state.stackPointer] = state.programCounter + 2
         state.programCounter = opCode.addr
 
         return false

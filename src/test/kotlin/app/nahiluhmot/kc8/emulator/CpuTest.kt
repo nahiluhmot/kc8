@@ -1,6 +1,7 @@
 package app.nahiluhmot.kc8.emulator
 
 import app.nahiluhmot.kc8.Constants
+import app.nahiluhmot.kc8.data.KeySetQueries
 import app.nahiluhmot.kc8.data.OpCode
 import app.nahiluhmot.kc8.data.State
 import app.nahiluhmot.kc8.io.FontLoader
@@ -8,10 +9,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlin.random.Random
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
+import kotlin.test.*
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class CpuTest {
@@ -118,13 +116,13 @@ class CpuTest {
                 assertEquals(
                     Constants.INITIAL_PROGRAM_COUNTER + 2,
                     state.stack[i],
-                    "Expected state.stack[$i] to be the return address"
+                    "Expected stack[$i] to be the return address"
                 )
             } else {
                 assertEquals(
                     0,
                     state.stack[i],
-                    "Expected state.stack[$i] to be 0"
+                    "Expected stack[$i] to be 0"
                 )
             }
         }
@@ -181,9 +179,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if (i == 0x7) {
-                assertEquals(0xFFu, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0xFFu, state.registers[i], "Expected registers[$i] to be unchanged")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -197,9 +195,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if (i == 0x9) {
-                assertEquals(0x13u, state.registers[i], "Expected state.registers[$i] to be changed")
+                assertEquals(0x13u, state.registers[i], "Expected registers[$i] to be changed")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -215,9 +213,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if (i == 0xA) {
-                assertEquals(0xF0u, state.registers[i], "Expected state.registers[$i] to be changed")
+                assertEquals(0xF0u, state.registers[i], "Expected registers[$i] to be changed")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -233,9 +231,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if ((i == 0x4) || (i == 0xB)) {
-                assertEquals(0x2Bu, state.registers[i], "Expected state.registers[$i] to be changed")
+                assertEquals(0x2Bu, state.registers[i], "Expected registers[$i] to be changed")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -252,9 +250,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x5 -> assertEquals(0xF7u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x3 -> assertEquals(0xA5u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x5 -> assertEquals(0xF7u, state.registers[i], "Expected registers[$i] to be changed")
+                0x3 -> assertEquals(0xA5u, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -271,9 +269,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x5 -> assertEquals(0xE0u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x3 -> assertEquals(0xF0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x5 -> assertEquals(0xE0u, state.registers[i], "Expected registers[$i] to be changed")
+                0x3 -> assertEquals(0xF0u, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -290,9 +288,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x5 -> assertEquals(0x40u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x3 -> assertEquals(0x24u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x5 -> assertEquals(0x40u, state.registers[i], "Expected registers[$i] to be changed")
+                0x3 -> assertEquals(0x24u, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -309,9 +307,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x5 -> assertEquals(0xB6u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x3 -> assertEquals(0xB2u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x5 -> assertEquals(0xB6u, state.registers[i], "Expected registers[$i] to be changed")
+                0x3 -> assertEquals(0xB2u, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -328,10 +326,10 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x5 -> assertEquals(0x01u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x3 -> assertEquals(0x2u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                0xF -> assertEquals(0x1u, state.registers[i], "Expected state.registers[$i] to be changed")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x5 -> assertEquals(0x01u, state.registers[i], "Expected registers[$i] to be changed")
+                0x3 -> assertEquals(0x2u, state.registers[i], "Expected registers[$i] to be unchanged")
+                0xF -> assertEquals(0x1u, state.registers[i], "Expected registers[$i] to be changed")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -348,10 +346,10 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x5 -> assertEquals(0x23u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x3 -> assertEquals(0xA2u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                0xF -> assertEquals(0x1u, state.registers[i], "Expected state.registers[$i] to be changed")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x5 -> assertEquals(0x23u, state.registers[i], "Expected registers[$i] to be changed")
+                0x3 -> assertEquals(0xA2u, state.registers[i], "Expected registers[$i] to be unchanged")
+                0xF -> assertEquals(0x1u, state.registers[i], "Expected registers[$i] to be changed")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -368,9 +366,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x5 -> assertEquals(0xFDu, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x3 -> assertEquals(0x07u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x5 -> assertEquals(0xFDu, state.registers[i], "Expected registers[$i] to be changed")
+                0x3 -> assertEquals(0x07u, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -386,8 +384,8 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x6 -> assertEquals(0x57u, state.registers[i], "Expected state.registers[$i] to be changed")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x6 -> assertEquals(0x57u, state.registers[i], "Expected registers[$i] to be changed")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -403,9 +401,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x6 -> assertEquals(0x57u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0xF -> assertEquals(0x1u, state.registers[i], "Expected state.registers[$i] to be changed")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x6 -> assertEquals(0x57u, state.registers[i], "Expected registers[$i] to be changed")
+                0xF -> assertEquals(0x1u, state.registers[i], "Expected registers[$i] to be changed")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -422,10 +420,10 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x3 -> assertEquals(0x03u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x5 -> assertEquals(0x04u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                0xF -> assertEquals(0x1u, state.registers[i], "Expected state.registers[$i] to be changed")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x3 -> assertEquals(0x03u, state.registers[i], "Expected registers[$i] to be changed")
+                0x5 -> assertEquals(0x04u, state.registers[i], "Expected registers[$i] to be unchanged")
+                0xF -> assertEquals(0x1u, state.registers[i], "Expected registers[$i] to be changed")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -442,9 +440,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x3 -> assertEquals(0x02u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0x5 -> assertEquals(0x01u, state.registers[i], "Expected state.registers[$i] to be unchanged")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x3 -> assertEquals(0x02u, state.registers[i], "Expected registers[$i] to be changed")
+                0x5 -> assertEquals(0x01u, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -460,8 +458,8 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x6 -> assertEquals(0x80u, state.registers[i], "Expected state.registers[$i] to be changed")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x6 -> assertEquals(0x80u, state.registers[i], "Expected registers[$i] to be changed")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -477,9 +475,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             when (i) {
-                0x6 -> assertEquals(0x02u, state.registers[i], "Expected state.registers[$i] to be changed")
-                0xF -> assertEquals(0x1u, state.registers[i], "Expected state.registers[$i] to be changed")
-                else -> assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                0x6 -> assertEquals(0x02u, state.registers[i], "Expected registers[$i] to be changed")
+                0xF -> assertEquals(0x1u, state.registers[i], "Expected registers[$i] to be changed")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -495,9 +493,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if (i == 0x1) {
-                assertEquals(0xFFu, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0xFFu, state.registers[i], "Expected registers[$i] to be unchanged")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -530,9 +528,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if (i == 0x0) {
-                assertEquals(0x08u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x08u, state.registers[i], "Expected registers[$i] to be unchanged")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -548,9 +546,9 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if (i == 0x4) {
-                assertEquals(0x45u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x45u, state.registers[i], "Expected registers[$i] to be updated")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }
@@ -566,9 +564,369 @@ class CpuTest {
 
         for (i in state.registers.indices) {
             if (i == 0x4) {
-                assertEquals(0x01u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x01u, state.registers[i], "Expected registers[$i] to be updated")
             } else {
-                assertEquals(0x0u, state.registers[i], "Expected state.registers[$i] to be unchanged")
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testDrawNoCollision() {
+        state.indexRegister = 5 * 0xB // draw "B"
+
+        cpu.executeOpCode(OpCode.Draw(0x1, 0x2, 5))
+
+        assertZeros(skipProgramCounter = true, skipFrameBuffer = true, skipIndexRegister = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(5 * 0xB, state.indexRegister)
+
+        for (i in state.frameBuffer.indices) {
+            if (i in 2..6) {
+                assertNotEquals(0u, state.frameBuffer[i], "Expected frameBuffer[$i] to be set")
+                assertEquals(0u, state.frameBuffer[i] % 2u, "Expected the first bit of frameBuffer[$i] to be unset")
+                assertEquals(
+                    1u,
+                    (state.frameBuffer[i] shr 1) % 2u,
+                    "Expected the second bit of frameBuffer[$i] to be unset"
+                )
+            } else {
+                assertEquals(0u, state.frameBuffer[i], "Expected frameBuffer[$i] to not be set")
+            }
+        }
+    }
+
+    @Test
+    fun testDrawCollision() {
+        val zero: ULong = 0u
+        val invZero: ULong = zero.inv()
+
+        state.indexRegister = 5 * 0xB // draw "B"
+        state.frameBuffer.fill(invZero)
+
+        cpu.executeOpCode(OpCode.Draw(0x1, 0x2, 5))
+
+        assertZeros(skipProgramCounter = true, skipFrameBuffer = true, skipIndexRegister = true, skipRegisters = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(5 * 0xB, state.indexRegister)
+
+        for (i in state.frameBuffer.indices) {
+            if (i in 2..6) {
+                assertNotEquals(invZero, state.frameBuffer[i], "Expected frameBuffer[$i] to be set")
+                assertEquals(1u, state.frameBuffer[i] % 2u, "Expected the first bit of frameBuffer[$i] to be set")
+                assertEquals(
+                    0u,
+                    (state.frameBuffer[i] shr 1) % 2u,
+                    "Expected the second bit of frameBuffer[$i] to be set"
+                )
+            } else {
+                assertEquals(invZero, state.frameBuffer[i], "Expected frameBuffer[$i] to not be set")
+            }
+        }
+
+        for (i in state.registers.indices) {
+            if (i == 0xF) {
+                assertEquals(0x1u, state.registers[i], "Expected registers[$i] to 1")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testSkipKeyTrue() {
+        val keySet = KeySetQueries.addKey(state.keySet, 0x9u)
+        state.keySet = KeySetQueries.addKey(state.keySet, 0x9u)
+        state.registers[0x0] = 0x9u
+
+        cpu.executeOpCode(OpCode.SkipKey(0x0))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipKeySet = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 4, state.programCounter)
+        assertEquals(keySet, state.keySet)
+
+        for (i in state.registers.indices) {
+            if (i == 0x0) {
+                assertEquals(0x9u, state.registers[i], "Expected registers[$i] to be unchanged")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testSkipKeyFalse() {
+        state.registers[0x0] = 0x9u
+
+        cpu.executeOpCode(OpCode.SkipKey(0x0))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+
+        for (i in state.registers.indices) {
+            if (i == 0x0) {
+                assertEquals(0x9u, state.registers[i], "Expected registers[$i] to be unchanged")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testSkipNotKeyTrue() {
+        state.registers[0x0] = 0x9u
+
+        cpu.executeOpCode(OpCode.SkipNotKey(0x0))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 4, state.programCounter)
+
+        for (i in state.registers.indices) {
+            if (i == 0x0) {
+                assertEquals(0x9u, state.registers[i], "Expected registers[$i] to be unchanged")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testSkipNotKeyFalse() {
+        val keySet = KeySetQueries.addKey(state.keySet, 0x9u)
+        state.keySet = KeySetQueries.addKey(state.keySet, 0x9u)
+        state.registers[0x0] = 0x9u
+
+        cpu.executeOpCode(OpCode.SkipNotKey(0x0))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipKeySet = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(keySet, state.keySet)
+
+        for (i in state.registers.indices) {
+            if (i == 0x0) {
+                assertEquals(0x9u, state.registers[i], "Expected registers[$i] to be unchanged")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testLoadDelay() {
+        state.delayTimer = 0x36u
+
+        cpu.executeOpCode(OpCode.LoadDelay(0x2))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipDelayTimer = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0x36u, state.delayTimer)
+
+        for (i in state.registers.indices) {
+            if (i == 0x2) {
+                assertEquals(0x36u, state.registers[i], "Expected registers[$i] to be changed")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testWaitForKeyTrue() {
+        val keySet = KeySetQueries.addKey(state.keySet, 0xFu)
+        state.keySet = KeySetQueries.addKey(state.keySet, 0xFu)
+
+        cpu.executeOpCode(OpCode.WaitForKey(0x0))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipKeySet = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(keySet, state.keySet)
+
+        for (i in state.registers.indices) {
+            if (i == 0x0) {
+                assertEquals(0xFu, state.registers[i], "Expected registers[$i] to be changed")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testWaitForKeyFalse() {
+        cpu.executeOpCode(OpCode.WaitForKey(0x3))
+
+        assertZeros(skipProgramCounter = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER, state.programCounter)
+    }
+
+    @Test
+    fun testSetDelay() {
+        state.registers[0x2] = 0x36u
+
+        cpu.executeOpCode(OpCode.SetDelay(0x2))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipDelayTimer = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0x36u, state.delayTimer)
+
+        for (i in state.registers.indices) {
+            if (i == 0x2) {
+                assertEquals(0x36u, state.registers[i], "Expected registers[$i] to be changed")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testSetSound() {
+        state.registers[0x2] = 0x36u
+
+        cpu.executeOpCode(OpCode.SetSound(0x2))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipSoundTimer = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0x36u, state.soundTimer)
+
+        for (i in state.registers.indices) {
+            if (i == 0x2) {
+                assertEquals(0x36u, state.registers[i], "Expected registers[$i] to be changed")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testAddIndex() {
+        state.indexRegister = 0x100
+        state.registers[0x5] = 0x12u
+
+        cpu.executeOpCode(OpCode.AddIndex(0x5))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipIndexRegister = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0x112, state.indexRegister)
+
+        for (i in state.registers.indices) {
+            if (i == 0x5) {
+                assertEquals(0x12u, state.registers[i], "Expected registers[$i] to be changed")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testLoadSprite() {
+        state.registers[0xE] = 0xAu
+
+        cpu.executeOpCode(OpCode.LoadSprite(0xE))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipIndexRegister = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0xA * 5, state.indexRegister)
+
+        for (i in state.registers.indices) {
+            if (i == 0xE) {
+                assertEquals(0xAu, state.registers[i], "Expected registers[$i] to be unchanged")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testStoreBcd() {
+        state.indexRegister = 0x800
+        state.registers[0xE] = 0x7Bu
+
+        cpu.executeOpCode(OpCode.StoreBcd(0xE))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipIndexRegister = true, skipMemory = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0x800, state.indexRegister)
+
+        for (i in state.registers.indices) {
+            if (i == 0xE) {
+                assertEquals(0x7Bu, state.registers[i], "Expected registers[$i] to be unchanged")
+            } else {
+                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+
+        // skip the first 80 to skip font values
+        for (i in 80 until state.memory.size) {
+            when (i) {
+                0x800 -> assertEquals(0x1u, state.memory[i], "Expected memory[$i] to be changed")
+                0x801 -> assertEquals(0x2u, state.memory[i], "Expected memory[$i] to be changed")
+                0x802 -> assertEquals(0x3u, state.memory[i], "Expected memory[$i] to be changed")
+                else -> assertEquals(0x0u, state.memory[i], "Expected memory[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testStoreRegisters() {
+        state.indexRegister = 0x900
+        state.registers[0x0] = 0xAAu
+        state.registers[0x1] = 0xBBu
+        state.registers[0x2] = 0xCCu
+
+        cpu.executeOpCode(OpCode.StoreRegisters(0x2))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipIndexRegister = true, skipMemory = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0x903, state.indexRegister)
+
+        for (i in state.registers.indices) {
+            when (i) {
+                0x0 -> assertEquals(0xAAu, state.registers[i], "Expected registers[$i] to be unchanged")
+                0x1 -> assertEquals(0xBBu, state.registers[i], "Expected registers[$i] to be unchanged")
+                0x2 -> assertEquals(0xCCu, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+
+        // skip the first 80 to skip font values
+        for (i in 80 until state.memory.size) {
+            when (i) {
+                0x900 -> assertEquals(0xAAu, state.memory[i], "Expected memory[$i] to be changed")
+                0x901 -> assertEquals(0xBBu, state.memory[i], "Expected memory[$i] to be changed")
+                0x902 -> assertEquals(0xCCu, state.memory[i], "Expected memory[$i] to be changed")
+                else -> assertEquals(0x0u, state.memory[i], "Expected memory[$i] to be unchanged")
+            }
+        }
+    }
+
+    @Test
+    fun testLoadRegisters() {
+        state.indexRegister = 0x900
+        state.memory[0x900] = 0xAAu
+        state.memory[0x901] = 0xBBu
+        state.memory[0x902] = 0xCCu
+
+        cpu.executeOpCode(OpCode.LoadRegisters(0x2))
+
+        assertZeros(skipProgramCounter = true, skipRegisters = true, skipIndexRegister = true, skipMemory = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
+        assertEquals(0x903, state.indexRegister)
+
+        for (i in state.registers.indices) {
+            when (i) {
+                0x0 -> assertEquals(0xAAu, state.registers[i], "Expected registers[$i] to be unchanged")
+                0x1 -> assertEquals(0xBBu, state.registers[i], "Expected registers[$i] to be unchanged")
+                0x2 -> assertEquals(0xCCu, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
+
+        // skip the first 80 to skip font values
+        for (i in 80 until state.memory.size) {
+            when (i) {
+                0x900 -> assertEquals(0xAAu, state.memory[i], "Expected memory[$i] to be changed")
+                0x901 -> assertEquals(0xBBu, state.memory[i], "Expected memory[$i] to be changed")
+                0x902 -> assertEquals(0xCCu, state.memory[i], "Expected memory[$i] to be changed")
+                else -> assertEquals(0x0u, state.memory[i], "Expected memory[$i] to be unchanged")
             }
         }
     }

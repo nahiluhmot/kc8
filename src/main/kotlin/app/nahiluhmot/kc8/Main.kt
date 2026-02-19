@@ -14,8 +14,8 @@ import java.io.File
 fun main(args: Array<String>) {
     val uiDriver = SwingDisplayDriver()
     val audioDriver = ClipAudioDriver()
-    val emulator = Emulator(1000, audioDriver, uiDriver)
-    val program = File(args[0])
+    val emulator = Emulator(args[0].toInt(), audioDriver, uiDriver)
+    val program = File(args[1])
 
     emulator.boot(program)
 

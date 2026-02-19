@@ -31,6 +31,27 @@ class CpuTest {
     }
 
     @Test
+    fun testCopyFrameBuffer() {
+        cpu.executeOpCode(OpCode.Load(0x0, 0xFu))
+        cpu.executeOpCode(OpCode.LoadSprite(0x0))
+        cpu.executeOpCode(OpCode.Draw(0x1, 0x2, 5))
+
+        assertNotEquals(0uL, state.frameBuffer[2])
+
+        val dst = ULongArray(state.frameBuffer.size)
+
+        cpu.copyFrameBuffer(dst)
+
+        for (i in state.frameBuffer.indices) {
+            assertEquals(
+                state.frameBuffer[i],
+                dst[i],
+                "Expected ${state.frameBuffer[i]}, got ${dst[i]} at frameBuffer[$i]"
+            )
+        }
+    }
+
+    @Test
     fun testCountDownTimersBothZero() {
         cpu.countDownTimers()
 

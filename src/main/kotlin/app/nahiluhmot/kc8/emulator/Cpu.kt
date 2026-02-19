@@ -188,12 +188,15 @@ class Cpu(val state: State, val rng: Random = Random.Default) {
     private fun executeDraw(opCode: OpCode.Draw): Boolean {
         var anyErased = false
 
+        val x = state.registers[opCode.x].toInt()
+        val y = state.registers[opCode.y].toInt()
+
         for (i in 0 until opCode.height) {
             val erased = FrameBufferMutations.drawUByte(
                 state.frameBuffer,
                 state.memory[state.indexRegister + i],
-                opCode.x,
-                opCode.y + i
+                x,
+                y + i
             )
 
             anyErased = anyErased || erased

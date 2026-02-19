@@ -625,10 +625,12 @@ class CpuTest {
     @Test
     fun testDrawNoCollision() {
         state.indexRegister = 5 * 0xB // draw "B"
+        state.registers[0x3] = 0x01u
+        state.registers[0x4] = 0x02u
 
-        cpu.executeOpCode(OpCode.Draw(0x1, 0x2, 5))
+        cpu.executeOpCode(OpCode.Draw(0x3, 0x4, 5))
 
-        assertZeros(skipProgramCounter = true, skipFrameBuffer = true, skipIndexRegister = true)
+        assertZeros(skipProgramCounter = true, skipFrameBuffer = true, skipIndexRegister = true, skipRegisters = true)
         assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
         assertEquals(5 * 0xB, state.indexRegister)
 
@@ -645,6 +647,14 @@ class CpuTest {
                 assertEquals(0u, state.frameBuffer[i], "Expected frameBuffer[$i] to not be set")
             }
         }
+
+        for (i in state.registers.indices) {
+            when (i) {
+                3 -> assertEquals(0x01u, state.registers[i], "Expected registers[$i] to be unchanged")
+                4 -> assertEquals(0x02u, state.registers[i], "Expected registers[$i] to be unchanged")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            }
+        }
     }
 
     @Test
@@ -654,8 +664,10 @@ class CpuTest {
 
         state.indexRegister = 5 * 0xB // draw "B"
         state.frameBuffer.fill(invZero)
+        state.registers[0x3] = 0x01u
+        state.registers[0x4] = 0x02u
 
-        cpu.executeOpCode(OpCode.Draw(0x1, 0x2, 5))
+        cpu.executeOpCode(OpCode.Draw(0x3, 0x4, 5))
 
         assertZeros(skipProgramCounter = true, skipFrameBuffer = true, skipIndexRegister = true, skipRegisters = true)
         assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
@@ -675,11 +687,13 @@ class CpuTest {
             }
         }
 
+
         for (i in state.registers.indices) {
-            if (i == 0xF) {
-                assertEquals(0x1u, state.registers[i], "Expected registers[$i] to 1")
-            } else {
-                assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
+            when (i) {
+                0x3 -> assertEquals(0x01u, state.registers[i], "Expected registers[$i] to be unchanged")
+                0x4 -> assertEquals(0x02u, state.registers[i], "Expected registers[$i] to be unchanged")
+                0xF -> assertEquals(0x1u, state.registers[i], "Expected registers[$i] to 1")
+                else -> assertEquals(0x0u, state.registers[i], "Expected registers[$i] to be unchanged")
             }
         }
     }

@@ -2,6 +2,7 @@ package app.nahiluhmot.kc8.io
 
 import app.nahiluhmot.kc8.Constants
 import app.nahiluhmot.kc8.data.State
+import java.io.File
 
 @OptIn(ExperimentalUnsignedTypes::class)
 /**
@@ -19,5 +20,17 @@ object Loader {
         val bytes = stream?.use { it.readBytes().toUByteArray() } ?: throw IllegalStateException("Could not load font")
 
         bytes.copyInto(state.memory)
+    }
+
+    /**
+     * Loads a program into the state, starting at the initial program counter.
+     *
+     * @param file the file which contains the program
+     * @param state the state to which the program should be written
+     */
+    fun loadProgram(file: File, state: State) {
+        val bytes = file.readBytes().toUByteArray()
+
+        bytes.copyInto(state.memory, Constants.INITIAL_PROGRAM_COUNTER)
     }
 }

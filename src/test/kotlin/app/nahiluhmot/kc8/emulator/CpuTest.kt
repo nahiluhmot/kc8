@@ -4,7 +4,7 @@ import app.nahiluhmot.kc8.Constants
 import app.nahiluhmot.kc8.data.KeySetQueries
 import app.nahiluhmot.kc8.data.OpCode
 import app.nahiluhmot.kc8.data.State
-import app.nahiluhmot.kc8.io.FontLoader
+import app.nahiluhmot.kc8.io.Loader
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -25,7 +25,7 @@ class CpuTest {
 
         state = State()
 
-        FontLoader.loadFont(state)
+        Loader.loadFont(state)
 
         cpu = Cpu(state, rng)
     }

@@ -1,19 +1,19 @@
 package app.nahiluhmot.kc8
 
 import app.nahiluhmot.kc8.data.State
-import app.nahiluhmot.kc8.io.FontLoader
+import app.nahiluhmot.kc8.io.Loader
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalUnsignedTypes::class)
-class FontLoaderTest {
+class ProgramLoaderTest {
     @Test
     fun testLoadFont() {
         val state = State()
 
         assertEquals(0x0u, state.memory[0])
 
-        FontLoader.loadFont(state)
+        Loader.loadFont(state)
 
         assertEquals(0xF0u, state.memory[0])
 

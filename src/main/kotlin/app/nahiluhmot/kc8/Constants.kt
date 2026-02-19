@@ -19,6 +19,7 @@ object Constants {
     const val SCREEN_WIDTH = 64
     const val SCREEN_HEIGHT = 32
     const val DEFAULT_SCALE = 10
+    const val REFRESH_RATE_HZ = 60
 
     // State
 
@@ -33,6 +34,7 @@ object Constants {
     const val DEFAULT_PRESSED_KEYS: KeySet = 0u
 
     // Keys
+
     const val KEY_0: Key = 0x0u
     const val KEY_1: Key = 0x1u
     const val KEY_2: Key = 0x2u

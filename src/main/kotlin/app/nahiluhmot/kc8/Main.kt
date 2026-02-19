@@ -4,7 +4,7 @@ package app.nahiluhmot.kc8
 
 import app.nahiluhmot.kc8.data.FrameBufferMutations
 import app.nahiluhmot.kc8.data.State
-import app.nahiluhmot.kc8.io.FontLoader
+import app.nahiluhmot.kc8.io.Loader
 import app.nahiluhmot.kc8.io.StatefulKeyHandler
 import app.nahiluhmot.kc8.io.clip.ClipAudioDriver
 import app.nahiluhmot.kc8.io.swing.SwingDisplayDriver
@@ -21,7 +21,7 @@ fun main() {
     audioDriver.startUp()
     uiDriver.startUp(keyHandler)
 
-    FontLoader.loadFont(state)
+    Loader.loadFont(state)
 
     Thread.sleep(1000)
 

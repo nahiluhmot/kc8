@@ -7,7 +7,7 @@ import app.nahiluhmot.kc8.data.State
 /**
  * Handles font loading from a resource file.
  */
-object FontLoader {
+object Loader {
     /**
      * Loads the default font from a resource file and writes it to the state.
      *

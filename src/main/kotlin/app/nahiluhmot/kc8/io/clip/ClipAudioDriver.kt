@@ -21,6 +21,8 @@ class ClipAudioDriver(val clip: Clip = ClipFactory.build()) : AudioDriver {
     }
 
     override fun stopBeep() {
+        if (!clip.isRunning) return
+
         clip.stop()
     }
 }

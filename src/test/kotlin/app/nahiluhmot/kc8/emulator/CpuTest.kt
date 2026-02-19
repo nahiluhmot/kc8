@@ -630,9 +630,16 @@ class CpuTest {
 
         cpu.executeOpCode(OpCode.Draw(0x3, 0x4, 5))
 
-        assertZeros(skipProgramCounter = true, skipFrameBuffer = true, skipIndexRegister = true, skipRegisters = true)
+        assertZeros(
+            skipProgramCounter = true,
+            skipFrameBuffer = true,
+            skipIndexRegister = true,
+            skipRegisters = true,
+            skipRenderFlag = true
+        )
         assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
         assertEquals(5 * 0xB, state.indexRegister)
+        assertTrue(state.renderFlag)
 
         for (i in state.frameBuffer.indices) {
             if (i in 2..6) {
@@ -669,9 +676,16 @@ class CpuTest {
 
         cpu.executeOpCode(OpCode.Draw(0x3, 0x4, 5))
 
-        assertZeros(skipProgramCounter = true, skipFrameBuffer = true, skipIndexRegister = true, skipRegisters = true)
+        assertZeros(
+            skipProgramCounter = true,
+            skipFrameBuffer = true,
+            skipIndexRegister = true,
+            skipRegisters = true,
+            skipRenderFlag = true
+        )
         assertEquals(Constants.INITIAL_PROGRAM_COUNTER + 2, state.programCounter)
         assertEquals(5 * 0xB, state.indexRegister)
+        assertTrue(state.renderFlag)
 
         for (i in state.frameBuffer.indices) {
             if (i in 2..6) {
@@ -1011,6 +1025,7 @@ class CpuTest {
         skipSoundTimer: Boolean = false,
         skipIndexRegister: Boolean = false,
         skipProgramCounter: Boolean = false,
+        skipRenderFlag: Boolean = false,
         skipKeySet: Boolean = false,
     ) {
         if (!skipMemory) {
@@ -1056,6 +1071,10 @@ class CpuTest {
 
         if (!skipProgramCounter) {
             assertEquals(0, state.programCounter, "Expected programCounter to be unchanged")
+        }
+
+        if (!skipRenderFlag) {
+            assertFalse(state.renderFlag, "Expected renderFlag to be unchanged")
         }
 
         if (!skipKeySet) {

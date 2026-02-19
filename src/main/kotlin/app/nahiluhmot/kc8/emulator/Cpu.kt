@@ -203,6 +203,7 @@ class Cpu(val state: State, val rng: Random = Random.Default) {
         }
 
         state.registers[0xF] = if (anyErased) 1u else 0u
+        state.renderFlag = true
 
         return true
     }

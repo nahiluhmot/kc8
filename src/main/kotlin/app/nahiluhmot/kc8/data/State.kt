@@ -16,6 +16,7 @@ class State(
     var soundTimer: SoundTimer = Constants.INITIAL_SOUND_TIMER,
     var indexRegister: IndexRegister = Constants.INITIAL_INDEX_REGISTER,
     var programCounter: ProgramCounter = Constants.INITIAL_PROGRAM_COUNTER,
+    var renderFlag: Boolean = false,
     // Volatile because this value is written by the UI thread and read by the CPU thread.
     @Volatile
     var keySet: KeySet = Constants.DEFAULT_PRESSED_KEYS

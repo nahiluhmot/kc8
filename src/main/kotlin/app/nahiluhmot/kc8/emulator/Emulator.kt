@@ -79,9 +79,12 @@ class Emulator(
                 cpu.executeOpCode(opCode)
             }
 
-            val renderBuffer = state.frameBuffer.copyOf()
+            if (state.renderFlag) {
+                // Copy the frame buffer to prevent it from being overwritten mid-write.
+                renderChannel.send(state.frameBuffer.copyOf())
 
-            renderChannel.send(renderBuffer)
+                state.renderFlag = false
+            }
 
             if (state.soundTimer > 0u) {
                 audioDriver.startBeep()

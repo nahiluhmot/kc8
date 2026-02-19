@@ -14,15 +14,9 @@ import kotlin.random.Random
  */
 @OptIn(ExperimentalUnsignedTypes::class)
 class Cpu(val state: State, val rng: Random = Random.Default) {
-    /**
-     * Decodes the op code at the current program counter and executes it.
-     *
-     * @throws IllegalStateException when the op code is invalid
-     */
-    fun decodeAndExecute() {
-        val opCode = decodeOpCode()
-
-        executeOpCode(opCode)
+    fun countDownTimers() {
+        if (state.delayTimer > 0u) state.delayTimer--
+        if (state.soundTimer > 0u) state.soundTimer--
     }
 
     /**

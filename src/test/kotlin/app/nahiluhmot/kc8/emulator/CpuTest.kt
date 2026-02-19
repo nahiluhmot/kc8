@@ -31,13 +31,33 @@ class CpuTest {
     }
 
     @Test
-    fun testDecodeAndExecute() {
-        writeOpCode(0x1738u) // JUMP 0x738
+    fun testCountDownTimersBothZero() {
+        cpu.countDownTimers()
 
-        cpu.decodeAndExecute()
+        assertZeros(skipProgramCounter = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER, state.programCounter)
+    }
 
-        assertZeros(skipProgramCounter = true, skipMemory = true)
-        assertEquals(0x738, state.programCounter)
+    @Test
+    fun testCountDownTimersDelayZero() {
+        state.soundTimer = 60u
+
+        cpu.countDownTimers()
+
+        assertZeros(skipProgramCounter = true, skipSoundTimer = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER, state.programCounter)
+        assertEquals(59u, state.soundTimer)
+    }
+
+    @Test
+    fun testCountDownTimersSoundZero() {
+        state.delayTimer = 10u
+
+        cpu.countDownTimers()
+
+        assertZeros(skipProgramCounter = true, skipDelayTimer = true)
+        assertEquals(Constants.INITIAL_PROGRAM_COUNTER, state.programCounter)
+        assertEquals(9u, state.delayTimer)
     }
 
     @Test

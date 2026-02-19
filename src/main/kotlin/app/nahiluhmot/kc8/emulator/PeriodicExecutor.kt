@@ -30,7 +30,7 @@ class PeriodicExecutor(val frequencyHz: Int) {
                 func.invoke()
 
                 nextExecutionNs =
-                    if (((now - nextExecutionNs) / timePerExecutionNs) > catchupMax) {
+                    if (((now - nextExecutionNs) / timePerExecutionNs) >= catchupMax) {
                         now + timePerExecutionNs
                     } else {
                         nextExecutionNs + timePerExecutionNs

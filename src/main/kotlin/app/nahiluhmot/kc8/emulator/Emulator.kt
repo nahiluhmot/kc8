@@ -1,14 +1,12 @@
 package app.nahiluhmot.kc8.emulator
 
 import app.nahiluhmot.kc8.Constants
-import app.nahiluhmot.kc8.data.FrameBuffer
 import app.nahiluhmot.kc8.data.State
 import app.nahiluhmot.kc8.io.AudioDriver
 import app.nahiluhmot.kc8.io.Loader
 import app.nahiluhmot.kc8.io.StatefulKeyHandler
 import app.nahiluhmot.kc8.io.UiDriver
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.Channel
 import java.io.File
 
 /**
@@ -25,14 +23,8 @@ class Emulator(
     val uiDriver: UiDriver
 ) {
     private var cpuJob: Job? = null
-    private var renderJob: Job? = null
     private val state = State()
     private val cpu = Cpu(state)
-    private val renderChannel = Channel<FrameBuffer>(CHANNEL_CAPACITY)
-
-    companion object {
-        private const val CHANNEL_CAPACITY = 2
-    }
 
     /**
      * Load a program into the emulator.
@@ -47,17 +39,12 @@ class Emulator(
         audioDriver.startUp()
 
         cpuJob = launch { runCpu() }
-        renderJob = launch { runRender() }
 
         cpuJob?.join()
-        renderJob?.join()
     }
 
     suspend fun shutDown() {
         cpuJob?.cancelAndJoin()
-        renderJob?.cancelAndJoin()
-
-        renderChannel.close()
 
         audioDriver.shutDown()
         uiDriver.shutDown()
@@ -81,7 +68,7 @@ class Emulator(
 
             if (state.renderFlag) {
                 // Copy the frame buffer to prevent it from being overwritten mid-write.
-                renderChannel.send(state.frameBuffer.copyOf())
+                uiDriver.render(state.frameBuffer.copyOf())
 
                 state.renderFlag = false
             }
@@ -99,14 +86,6 @@ class Emulator(
                 cpuCycle = nextCpuCycle
                 displayCycle = nextDisplayCycle
             }
-        }
-    }
-
-    private suspend fun runRender() = coroutineScope {
-        while (isActive) {
-            val frame = renderChannel.receiveCatching().getOrNull() ?: continue
-
-            uiDriver.render(frame)
         }
     }
 }

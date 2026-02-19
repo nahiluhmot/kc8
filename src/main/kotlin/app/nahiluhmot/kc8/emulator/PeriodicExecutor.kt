@@ -15,7 +15,7 @@ class PeriodicExecutor(val frequencyHz: Int) {
     val catchupMax = frequencyHz * MAX_SECONDS_BEHIND
 
     companion object {
-        private const val SAFE_DELAY_DURATION_NS = 3_000_000L // 3ms
+        private const val SAFE_DELAY_DURATION_NS = 2_000_000L // 2ms
         private const val DELAY_VALUE_MS = 1L
         private const val MAX_SECONDS_BEHIND = 2
     }

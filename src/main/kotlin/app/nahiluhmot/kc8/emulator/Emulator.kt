@@ -32,12 +32,12 @@ class Emulator(
     fun boot(program: File) {
         Loader.loadFont(state)
         Loader.loadProgram(program, state)
+
+        uiDriver.startUp(StatefulKeyHandler(state))
+        audioDriver.startUp()
     }
 
     suspend fun run() = coroutineScope {
-        uiDriver.startUp(StatefulKeyHandler(state))
-        audioDriver.startUp()
-
         cpuJob = launch { runCpu() }
 
         cpuJob?.join()
@@ -50,42 +50,33 @@ class Emulator(
         uiDriver.shutDown()
     }
 
-    private suspend fun runCpu() {
-        var cpuCycle = 0
-        var displayCycle = 0
+    private suspend fun runCpu() =
+        PeriodicExecutor(Constants.REFRESH_RATE_HZ)
+            .run(this::runDisplayCycle)
 
-        return PeriodicExecutor(Constants.REFRESH_RATE_HZ).run {
-            val nextDisplayCycle = displayCycle + 1
-            val nextCpuCycle = ((displayCycle.toDouble() / Constants.REFRESH_RATE_HZ) * cpuFrequencyHz).toInt()
+    private fun runDisplayCycle(displayCycle: Int) {
+        val cpuCycle = (cpuFrequencyHz * displayCycle) / Constants.REFRESH_RATE_HZ
+        val nextCpuCycle = (cpuFrequencyHz * (displayCycle + 1)) / Constants.REFRESH_RATE_HZ
 
-            cpu.countDownTimers()
+        cpu.countDownTimers()
 
-            repeat(nextCpuCycle - cpuCycle) {
-                val opCode = cpu.decodeOpCode()
+        repeat(nextCpuCycle - cpuCycle) {
+            val opCode = cpu.decodeOpCode()
 
-                cpu.executeOpCode(opCode)
-            }
+            cpu.executeOpCode(opCode)
+        }
 
-            if (state.renderFlag) {
-                // Copy the frame buffer to prevent it from being overwritten mid-write.
-                uiDriver.render(state.frameBuffer.copyOf())
+        if (state.renderFlag) {
+            // Copy the frame buffer to prevent it from being overwritten mid-render.
+            uiDriver.render(state.frameBuffer.copyOf())
 
-                state.renderFlag = false
-            }
+            state.renderFlag = false
+        }
 
-            if (state.soundTimer > 0u) {
-                audioDriver.startBeep()
-            } else {
-                audioDriver.stopBeep()
-            }
-
-            if (nextDisplayCycle == Constants.REFRESH_RATE_HZ) {
-                cpuCycle = 0
-                displayCycle = 0
-            } else {
-                cpuCycle = nextCpuCycle
-                displayCycle = nextDisplayCycle
-            }
+        if (state.soundTimer > 0u) {
+            audioDriver.startBeep()
+        } else {
+            audioDriver.stopBeep()
         }
     }
 }

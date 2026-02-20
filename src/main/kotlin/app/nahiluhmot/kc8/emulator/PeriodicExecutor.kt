@@ -20,15 +20,17 @@ class PeriodicExecutor(val frequencyHz: Int) {
         private const val MAX_SECONDS_BEHIND = 2
     }
 
-    suspend fun run(func: suspend () -> Unit) = coroutineScope {
+    suspend fun run(func: suspend (Int) -> Unit) = coroutineScope {
         var nextExecutionNs = System.nanoTime()
+        var cycle = 0
 
         while (isActive) {
             val now = System.nanoTime()
 
             if (now >= nextExecutionNs) {
-                func.invoke()
+                func.invoke(cycle)
 
+                cycle = (cycle + 1) % frequencyHz
                 nextExecutionNs =
                     if (((now - nextExecutionNs) / timePerExecutionNs) >= catchupMax) {
                         now + timePerExecutionNs

@@ -1,6 +1,9 @@
 package app.nahiluhmot.kc8.emulator
 
-import app.nahiluhmot.kc8.data.*
+import app.nahiluhmot.kc8.data.FrameBufferMutations
+import app.nahiluhmot.kc8.data.KeySetQueries
+import app.nahiluhmot.kc8.data.OpCode
+import app.nahiluhmot.kc8.data.State
 import kotlin.random.Random
 
 /**
@@ -11,13 +14,6 @@ import kotlin.random.Random
  */
 @OptIn(ExperimentalUnsignedTypes::class)
 class Cpu(val state: State, val rng: Random = Random.Default) {
-    /**
-     * Copy the frame buffer into a different buffer for the UI thread.
-     */
-    fun copyFrameBuffer(dst: FrameBuffer) {
-        state.frameBuffer.copyInto(dst)
-    }
-
     /**
      * Count down the state & delay timer.
      */

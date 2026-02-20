@@ -21,10 +21,6 @@ class SwingChip8JPanel(scale: Int) : JPanel() {
     private val scaledHeight: Int = scale * SCREEN_HEIGHT
     private val imageBuffer = BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_BYTE_BINARY)
 
-    companion object {
-        private const val ZERO: UByte = 0u
-    }
-
     init {
         this.preferredSize = Dimension(scaledWidth, scaledHeight)
     }

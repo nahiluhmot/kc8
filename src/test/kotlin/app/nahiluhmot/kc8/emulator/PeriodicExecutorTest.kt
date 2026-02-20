@@ -12,12 +12,14 @@ class PeriodicExecutorTest {
 
     @Test
     fun testRunFast() {
-        val ary = ArrayDeque<Long>()
+        val indexes = ArrayDeque<Int>()
+        val times = ArrayDeque<Long>()
 
         runBlocking {
             val job = launch {
-                executor.run {
-                    ary.add(System.currentTimeMillis())
+                executor.run { i ->
+                    indexes.add(i)
+                    times.add(System.currentTimeMillis())
                 }
             }
 
@@ -26,10 +28,13 @@ class PeriodicExecutorTest {
             job.cancel()
         }
 
-        assertEquals(2, ary.size)
+        assertEquals(2, times.size)
+        assertEquals(2, indexes.size)
 
-        val diff = ary[1] - ary[0]
+        val diff = times[1] - times[0]
 
-        assertTrue(diff in 100..110, "Expected a difference of 500-600ms, got: ${diff}ms")
+        assertTrue(diff in 100..110, "Expected a difference of 100ms, got: ${diff}ms")
+        assertEquals(0, indexes[0])
+        assertEquals(1, indexes[1])
     }
 }
